@@ -3,6 +3,7 @@ package com.shopme.admin.user;
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
@@ -27,13 +28,13 @@ public class UserController {
 
     @GetMapping("/users")
     public String listFirstPage(Model model){
-        return listByPage(1, model, "id", "asc");
+        return listByPage(1, model, "id", "asc", null);
     }
 
     @GetMapping("/users/page/{pageNum}")
     public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model,
-                             @Param("sortField") String sortField, @Param("sortDir") String sortDir){
-        Page<User> page = service.listByPage(pageNum, sortField, sortDir);
+                             @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword){
+        Page<User> page = service.listByPage(pageNum, sortField, sortDir, keyword);
         List<User> listUsers = page.getContent();
 
         long startCount = (pageNum - 1) * UserService.USERS_PER_PAGE + 1;
@@ -53,6 +54,7 @@ public class UserController {
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("keyword", keyword);
         return "users";
     }
 
@@ -86,7 +88,10 @@ public class UserController {
         }
 
         redirectAttributes.addFlashAttribute("message", "The user has been saved successfully");
-        return "redirect:/users";
+
+        String firstPartOfEmail = user.getEmail().split("@")[0];
+
+        return "redirect:/users/page/1?sortField=id&sortDir=asc&keyword=" + firstPartOfEmail;
     }
 
     @GetMapping("/users/edit/{id}")
@@ -122,6 +127,27 @@ public class UserController {
         String message = "The user ID " + id + " has been " + status;
         redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/users";
+    }
+
+    @GetMapping("/users/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        List<User> listUsers = service.listAllUsers();
+        UserCsvExporter exporter = new UserCsvExporter();
+        exporter.export(listUsers, response);
+    }
+
+    @GetMapping("/users/export/excel")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        List<User> listUsers = service.listAllUsers();
+        UserExcelExporter exporter = new UserExcelExporter();
+        exporter.export(listUsers, response);
+    }
+
+    @GetMapping("/users/export/pdf")
+    public void exportToPDF(HttpServletResponse response) throws IOException {
+        List<User> listUsers = service.listAllUsers();
+        UserPdfExporter exporter = new UserPdfExporter();
+        exporter.export(listUsers, response);
     }
 
 }

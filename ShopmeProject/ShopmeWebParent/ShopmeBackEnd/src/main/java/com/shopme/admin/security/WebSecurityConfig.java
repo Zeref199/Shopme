@@ -36,19 +36,30 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider())
                 .authorizeRequests((authorizeRequests) -> authorizeRequests
-                                .anyRequest()
-                                .authenticated())
-                                .formLogin((formLogin) -> formLogin
-                                        .loginPage("/login")
-                                        .usernameParameter("email")
-                                        .passwordParameter("password")
-                                        .permitAll())
-                .logout((logout) ->
-                        logout.logoutUrl("/logout")
-                                .logoutSuccessUrl("/login?logout")
-                                .invalidateHttpSession(true)
-                                .deleteCookies("JSESSIONID")
-                                .permitAll())
+                        .requestMatchers("/users/**").hasAuthority("Admin")
+                        .requestMatchers("/categories/**").hasAnyAuthority("Admin", "Editor")
+                        .requestMatchers("/categories/**").hasAnyAuthority("Admin", "Editor")
+                        .requestMatchers("/brands/**").hasAnyAuthority("Admin", "Editor")
+                        .requestMatchers("/products/**").hasAnyAuthority("Admin", "Salesperson", "Editor", "Shipper")
+                        .requestMatchers("/customers/**").hasAnyAuthority("Admin", "Salesperson")
+                        .requestMatchers("/shipping/**").hasAnyAuthority("Admin", "Salesperson")
+                        .requestMatchers("/orders/**").hasAnyAuthority("Admin", "Salesperson", "Shipper")
+                        .requestMatchers("/report/**").hasAnyAuthority("Admin", "Salesperson")
+                        .requestMatchers("/articles/**").hasAnyAuthority("Admin", "Editor")
+                        .requestMatchers("/menus/**").hasAnyAuthority("Admin", "Editor")
+                        .anyRequest()
+                        .authenticated())
+                .formLogin((formLogin) -> formLogin
+                        .loginPage("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .permitAll())
+                .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll())
                 .rememberMe((remember) -> remember
                         .key("ajhsgduqywbh_1234567890")
                         .tokenValiditySeconds(7 * 24 * 60 * 60));

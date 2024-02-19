@@ -18,5 +18,12 @@ public class MvcConfig implements WebMvcConfigurer {
         String userPhotosPath = userPhotosDir.toFile().getAbsolutePath();
 
         registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/" + userPhotosPath + "/");
+
+        String CategoryImagesDirName = "../category-images";
+        Path categoryImageDir = Paths.get(CategoryImagesDirName);
+
+        String categoryImagePath = categoryImageDir.toFile().getAbsolutePath();
+
+        registry.addResourceHandler("/category-images/**").addResourceLocations("file:/" + categoryImagePath + "/");
     }
 }

@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head th:replace="~{fragments :: page_head('Error - Shopme Admin', '/css/errorPageStyle.css')}" />
+<head th:replace="~{fragments :: page_head('Error - Shopme Admin', '/css/errorPageStyle.css')}"/>
 <body>
-<div class="container-fluid">
 
-  <div th:replace="~{navigation :: menu}" />
-
-  <div class="m-3">
-    <h2>Sorry, an unexpected error has occurred</h2>
-  </div>
-
-  <div th:replace="~{fragments :: footer}"></div>
-
+<div class="container">
+  <h1>Error</h1>
+  <p>Oops!  an unexpected error has occurred.</p>
+  <p>Go back to <a th:href="@{/}">homepage</a>.</p>
 </div>
 
 

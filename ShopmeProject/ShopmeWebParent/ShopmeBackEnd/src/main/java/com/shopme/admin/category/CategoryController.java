@@ -1,6 +1,7 @@
 package com.shopme.admin.category;
 
 import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.user.UserNotFoundException;
 import com.shopme.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -80,6 +81,27 @@ public class CategoryController {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
             return "redirect:/categories";
         }
+    }
+    @GetMapping("/categories/{id}/enabled/{status}")
+    public String updateCategoryEnabledStatus(@PathVariable("id") Integer id, @PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes){
+        service.updateCategoryEnabledStatus(id, enabled);
+        String status = enabled ? "enabled" : "disabled";
+        String message = "The Category ID " + id + " has been " + status;
+        redirectAttributes.addFlashAttribute("message", message);
+        return "redirect:/categories";
+    }
+
+    @GetMapping("/categories/delete/{id}")
+    public String deleteUser(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes){
+        try {
+            service.delete(id);
+            String categoryDir = "../category-images/" + id;
+            FileUploadUtil.removeDir(categoryDir);
+            redirectAttributes.addFlashAttribute("message", "The categeroy ID: " + id + "has been deleted successfully");
+        }catch(UserNotFoundException ex){
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+        }
+        return "redirect:/categories";
     }
 
 }

@@ -1,5 +1,6 @@
 package com.shopme.admin.category;
 
+import com.shopme.admin.user.UserNotFoundException;
 import com.shopme.common.entity.Category;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,14 @@ public class CategoryService {
 
         }
         return hierarchicalCategories;
+    }
+
+    public void delete(Integer id) throws UserNotFoundException{
+        Long countById = repo.countById(id);
+        if(countById == null || countById == 0){
+            throw new UserNotFoundException("Could not find any category with id " + id);
+        }
+        repo.deleteById(id);
     }
 
     private void listSubHierarchicalCategories(List<Category> hierarchicalCategories, Category parent, int subLevel, String sortDir){
@@ -156,5 +165,10 @@ public class CategoryService {
         });
         sortedChildren.addAll(children);
         return sortedChildren;
+    }
+
+
+    public void updateCategoryEnabledStatus(Integer id, boolean enabled){
+        repo.updateEnabledStatus(id, enabled);
     }
 }

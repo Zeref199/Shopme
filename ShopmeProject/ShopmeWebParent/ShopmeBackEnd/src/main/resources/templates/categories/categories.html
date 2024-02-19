@@ -72,16 +72,22 @@
         </table>
     </div>
 
+    <div th:replace="~{modal_fragments :: confirm_modal}"></div>
+
     <div th:replace="~{fragments :: footer}"></div>
 </div>
 
 <script type="text/javascript">
+    moduleURL = "[[@{/categories}]]";
 
+    $(document).ready(function(){
+        $(".link-delete").on("click", function (e){
+            e.preventDefault();
+            showDeleteConfirmModal($(this), 'category');
+        });
+    });
 
-    function clearFilter(){
-        window.location = "[[@{/categories}]]";
-    }
 </script>
-
+<script th:src="@{/js/common_list.js}"></script>
 </body>
 </html>

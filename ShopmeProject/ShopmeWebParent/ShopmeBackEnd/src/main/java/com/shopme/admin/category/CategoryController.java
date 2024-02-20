@@ -25,11 +25,11 @@ public class CategoryController {
     private CategoryService service;
     @GetMapping("/categories")
     public String listFirstPage(@Param("sortDir") String sortDir, Model model){
-        return listByPage(1, sortDir, model);
+        return listByPage(1, sortDir, null, model);
     }
 
     @GetMapping("/categories/page/{pageNum}")
-    public String listByPage(@PathVariable(name = "pageNum") int pageNum, @Param("sortDir") String sortDir, Model model){
+    public String listByPage(@PathVariable(name = "pageNum") int pageNum, @Param("sortDir") String sortDir, @Param("keyword") String keyword,  Model model){
 
         if(sortDir == null || sortDir.isEmpty()){
             sortDir = "asc";
@@ -37,7 +37,7 @@ public class CategoryController {
 
         CategoryPageInfo pageInfo = new CategoryPageInfo();
 
-        List<Category> listCategories =  service.listByPage(pageInfo, pageNum, sortDir);
+        List<Category> listCategories =  service.listByPage(pageInfo, pageNum, sortDir, keyword);
 
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 
@@ -56,6 +56,7 @@ public class CategoryController {
         model.addAttribute("totalItems", pageInfo.getTotalElements());
         model.addAttribute("listCategories", listCategories);
         model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("keyword", keyword);
 
         return "categories/categories";
     }

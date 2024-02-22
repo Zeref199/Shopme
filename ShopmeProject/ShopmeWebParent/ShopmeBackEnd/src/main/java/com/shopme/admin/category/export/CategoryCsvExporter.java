@@ -1,4 +1,4 @@
-package com.shopme.admin.category;
+package com.shopme.admin.category.export;
 
 import com.shopme.admin.AbstractExporter;
 import com.shopme.common.entity.Category;

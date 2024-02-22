@@ -1,4 +1,4 @@
-package com.shopme.admin.category;
+package com.shopme.admin.category.repo;
 
 import com.shopme.common.entity.Category;
 import org.springframework.data.domain.Page;

@@ -1,5 +1,8 @@
-package com.shopme.admin.category;
+package com.shopme.admin.category.service;
 
+import com.shopme.admin.category.CategoryNotFoundException;
+import com.shopme.admin.category.CategoryPageInfo;
+import com.shopme.admin.category.repo.CategoryRepository;
 import com.shopme.admin.user.UserNotFoundException;
 import com.shopme.common.entity.Category;
 import jakarta.transaction.Transactional;

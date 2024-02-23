@@ -1,5 +1,7 @@
 package com.shopme.admin.brand;
 
+import com.shopme.admin.brand.repo.BrandRepository;
+import com.shopme.admin.brand.service.BrandService;
 import com.shopme.common.entity.Brand;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

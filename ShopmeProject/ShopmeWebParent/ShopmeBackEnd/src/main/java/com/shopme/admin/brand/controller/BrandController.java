@@ -1,9 +1,13 @@
-package com.shopme.admin.brand;
+package com.shopme.admin.brand.controller;
 
 import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.brand.BrandNotFoundException;
+import com.shopme.admin.brand.service.BrandService;
+import com.shopme.admin.brand.export.BrandCsvExporter;
 import com.shopme.admin.category.service.CategoryService;
 import com.shopme.common.entity.Brand;
 import com.shopme.common.entity.Category;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
@@ -123,5 +127,12 @@ public class BrandController {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }
         return "redirect:/brands";
+    }
+
+    @GetMapping("/brands/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        List<Brand> listBrands = brandService.listAll();
+        BrandCsvExporter exporter = new BrandCsvExporter();
+        exporter.export(listBrands, response);
     }
 }

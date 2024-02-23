@@ -1,5 +1,7 @@
-package com.shopme.admin.brand;
+package com.shopme.admin.brand.service;
 
+import com.shopme.admin.brand.BrandNotFoundException;
+import com.shopme.admin.brand.repo.BrandRepository;
 import com.shopme.common.entity.Brand;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,7 @@ public class BrandService {
         return repo.save(brand);
     }
 
-    public Brand get(Integer id) throws BrandNotFoundException{
+    public Brand get(Integer id) throws BrandNotFoundException {
         try{
             return repo.findById(id).get();
         }catch(NoSuchElementException ex){

@@ -1,5 +1,6 @@
-package com.shopme.admin.brand;
+package com.shopme.admin.brand.controller;
 
+import com.shopme.admin.brand.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PostMapping;

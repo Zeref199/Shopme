@@ -24,7 +24,7 @@
             <tr>
                 <th>Brand ID</th>
                 <th>Logo</th>
-                <th>Brand Name</th>
+                <th th:replace="~{fragments :: column_link('/brands', 'name', 'Brand Name', 'none')}"></th>
                 <th>Categories</th>
                 <th></th>
             </tr>
@@ -69,16 +69,9 @@
         </div>
 
     </div>
- <!--
-    <div th:if="${keyword != null}" class="text-center">
-        <span>Search result does not show categories in hierarchical form</span>
-        <div th:replace="~{fragments :: pagination('/brands', 'categories')}"></div>
-    </div>
 
-    <th:block th:unless="${keyword != null}">
-    <div th:replace="~{fragments :: pagination('/categories', 'top_level categories')}"></div>
-    </th:block>
--->
+    <div th:replace="~{fragments :: pagination('/brands', 'brands')}"></div>
+
     <div th:replace="~{modal_fragments :: confirm_modal}"></div>
 
     <div th:replace="~{fragments :: footer}"></div>

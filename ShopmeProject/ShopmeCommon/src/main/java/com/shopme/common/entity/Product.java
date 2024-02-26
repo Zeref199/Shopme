@@ -16,7 +16,7 @@ public class Product {
     private String name;
     @Column(unique = true, length = 256, nullable = false)
     private String alias;
-    @Column(name = "short_description", length = 512, nullable = false)
+    @Column(name = "short_description", length = 1000, nullable = false)
     private String shortDescription;
     @Column(name = "full_description", length = 4096, nullable = false)
     private String fullDescription;
@@ -221,5 +221,11 @@ public class Product {
 
     public void addExtraImage(String imageName){
         this.images.add(new ProductImage(imageName, this));
+    }
+    @Transient
+    public String getMainImagePath(){
+        if(id == null || mainImage == null) return "/images/image-thumbnail.png";
+
+        return "/product-images/" + this.id + "/" + this.mainImage;
     }
 }

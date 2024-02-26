@@ -3,6 +3,8 @@ package com.shopme.common.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="products")
@@ -30,6 +32,11 @@ public class Product {
     private float cost;
 
     private float price;
+    @Column(name = "main_image", nullable = false)
+    private String mainImage;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<ProductImage> images = new HashSet<>();
+
     @Column(name= "discount_percent")
     private float discountPercent;
 
@@ -132,6 +139,14 @@ public class Product {
         this.price = price;
     }
 
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
+
     public float getDiscountPercent() {
         return discountPercent;
     }
@@ -188,11 +203,23 @@ public class Product {
         this.brand = brand;
     }
 
+    public Set<ProductImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<ProductImage> images) {
+        this.images = images;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void addExtraImage(String imageName){
+        this.images.add(new ProductImage(imageName, this));
     }
 }

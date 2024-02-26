@@ -60,4 +60,15 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/products";
     }
+
+    @GetMapping("/products/delete/{id}")
+    public String deleteProduct(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes){
+        try {
+            productService.delete(id);
+            redirectAttributes.addFlashAttribute("message", "The Product ID: " + id + "has been deleted successfully");
+        }catch(ProductNotFoundException ex){
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+        }
+        return "redirect:/products";
+    }
 }

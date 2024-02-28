@@ -10,6 +10,10 @@ public class ProductImage {
     private Integer id;
     @Column(nullable = false)
     private String name;
+
+    private String imagePath;
+    private Integer Status;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -43,5 +47,21 @@ public class ProductImage {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public String getImagePath() {
+        return "/product-images/" + product.getId() + "/extras" + "/" + this.name;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public Integer getStatus() {
+        return Status;
+    }
+
+    public void setStatus(Integer status) {
+        Status = 0;
     }
 }

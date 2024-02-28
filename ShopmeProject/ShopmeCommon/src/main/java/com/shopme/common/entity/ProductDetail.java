@@ -16,6 +16,8 @@ public class ProductDetail {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    private Integer status;
+
     public ProductDetail() {}
 
     public ProductDetail(String name, String value, Product product) {
@@ -54,5 +56,13 @@ public class ProductDetail {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus() {
+        status = 0;
     }
 }

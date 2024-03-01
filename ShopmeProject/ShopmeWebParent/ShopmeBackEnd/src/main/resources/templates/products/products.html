@@ -22,11 +22,11 @@
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
             <thead class="thead-dark">
             <tr>
-                <th class="hideable-column">ID</th>
+                <th th:replace="~{fragments :: column_link('/products', 'id', 'ID', 'none')}" class="hideable-column"></th>
                 <th>Main Image</th>
                 <th th:replace="~{fragments :: column_link('/products', 'name', 'Product Name', 'none')}"></th>
-                <th>Brand</th>
-                <th>Category</th>
+                <th th:replace="~{fragments :: column_link('/products', 'brand', 'Brand', 'none')}"></th>
+                <th th:replace="~{fragments :: column_link('/products', 'category', 'Category', 'none')}"></th>
                 <th th:replace="~{fragments :: column_link('/products','enabled', 'Enabled', 'none')}"></th>
                 <th></th>
             </tr>
@@ -38,8 +38,8 @@
                     <img th:src="@{${product.mainImagePath}}" style="width: 120px" class="img-fluid" />
                 </td>
                 <td>
-                    <a class="link-detail" th:href="@{'/products/detail/' + ${product.id}}" title="View details of this product">
-                        [[${product.name}]]
+                    <a class="link-detail" th:href="@{'/products/detail/' + ${product.id}}" th:title="${product.name}">
+                        [[${product.shortName}]]
                     </a>
                     </td>
                 <td>[[${product.brand.name}]]</td>
@@ -66,27 +66,35 @@
 
             </div>
             <div class="col-8">
-                <div>[[${product.name}]]</div>
+                <div>
+                    <img th:src="@{${product.mainImagePath}}" style="width: 120px" class="img-fluid" />
+                </div>
+                <div>
+                    <a class="link-detail" th:href="@{'/products/detail/' + ${product.id}}" th:title="${product.name}">
+                        [[${product.shortName}]]
+                    </a>
+                </div>
                 <div>[[${product.brand.name}]]</div>
                 <div>[[${product.category.name}]]</div>
                 <div>
-                    <div>
-                        <div th:replace="~{fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})}"></div>
-                        &nbsp;
-                        <div th:replace="~{fragments :: edit('product', '/products/edit/' + ${product.id})}"></div>
-                        &nbsp;
-                        <div th:replace="~{fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)}"></div>
-                        &nbsp;
-                    </div>
+                    <div th:replace="~{fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})}"></div>
+                </div>
+                <div>
+                    <a class="fa fa-file-alt fa-2x icon-green link-detail" th:href="@{'/products/detail/' + ${product.id}}" title="View details of this product">
+                    </a>
+                    &nbsp;&nbsp;
+                    <div th:replace="~{fragments :: edit('product', '/products/edit/' + ${product.id})}"></div>
+                    &nbsp;&nbsp;
+                    <div th:replace="~{fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)}"></div>
                 </div>
             </div>
             <div>&nbsp;</div>
         </div>
 
     </div>
-<!--
+
     <div th:replace="~{fragments :: pagination('/products', 'products')}"></div>
-    -->
+
 
     <div th:replace="~{modal_fragments :: confirm_modal}"></div>
     <div th:replace="~{modal_fragments :: detail_modal}"></div>

@@ -26,10 +26,10 @@ public class ProductService {
         }
 
         if(product.getAlias() == null || product.getAlias().isEmpty()){
-            String defaultAlias = product.getName().replaceAll(" ", "-");
+            String defaultAlias = product.getName().replaceAll(" ", "_");
             product.setAlias(defaultAlias);
         }else{
-            product.setAlias(product.getAlias().replaceAll(" ", "-"));
+            product.setAlias(product.getAlias().replaceAll(" ", "_"));
         }
         product.setUpdatedTime(new Date());
 

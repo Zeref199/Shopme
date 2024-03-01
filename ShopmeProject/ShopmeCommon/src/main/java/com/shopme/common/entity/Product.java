@@ -32,7 +32,7 @@ public class Product {
     private float price;
     @Column(name = "main_image", nullable = false)
     private String mainImage;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProductImage> images = new HashSet<>();
 
     @Column(name= "discount_percent")
@@ -49,8 +49,10 @@ public class Product {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductDetail> details = new ArrayList<>();
+
+
 
     public Integer getId() {
         return id;
@@ -240,5 +242,21 @@ public class Product {
 
     public void addDetails(String name, String value){
         this.details.add(new ProductDetail(name, value, this));
+    }
+
+    public void addDetails(Integer id, String name, String value){
+        this.details.add(new ProductDetail(id, name, value, this));
+    }
+
+    public boolean containsImageName(String imageName) {
+        Iterator<ProductImage> iterator = images.iterator();
+
+        while(iterator.hasNext()){
+            ProductImage image = iterator.next();
+            if(image.getName().equals(imageName)){
+                return true;
+            }
+        }
+        return false;
     }
 }

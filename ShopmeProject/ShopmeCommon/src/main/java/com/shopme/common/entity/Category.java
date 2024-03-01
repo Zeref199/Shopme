@@ -18,6 +18,8 @@ public class Category {
     @Column(length = 128, nullable = false)
     private String image;
     private boolean enabled;
+    @Column(name="all_parent_ids", length = 256, nullable = true)
+    private String allParentIds;
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parent;
@@ -145,6 +147,14 @@ public class Category {
 
     public void setChildren(Set<Category> children) {
         this.children = children;
+    }
+
+    public String getAllParentIds() {
+        return allParentIds;
+    }
+
+    public void setAllParentIds(String allParentIds) {
+        this.allParentIds = allParentIds;
     }
 
     @Transient

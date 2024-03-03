@@ -129,18 +129,15 @@
                         <div th:replace="~{fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)}"></div>
                     </th:block>
                 </div>
-
-            <div>&nbsp;</div>
+                <div>&nbsp;</div>
+            </div>
         </div>
-
     </div>
-
-    <div th:replace="~{fragments :: pagination('/products', 'products')}"></div>
-
 
     <div th:replace="~{modal_fragments :: confirm_modal}"></div>
     <div th:replace="~{modal_fragments :: detail_modal}"></div>
 
+    <div th:replace="~{fragments :: pagination('/products', 'products')}"></div>
 
     <div th:replace="~{fragments :: footer}"></div>
 </div>

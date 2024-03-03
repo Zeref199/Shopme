@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head th:replace="~{fragments :: page_head('Products - Shopme Admin', '/css/style.css', 'none')}"></head>
 
 <body>
@@ -12,8 +13,10 @@
     </div>
 
     <div>
+        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
         <a th:href="@{/products/new}" class="fa-solid fa-folder-plus fa-2x mr-3"></a>
         <a th:href="@{/products/export/csv}" class="fa-solid fa-file-csv fa-2x mr-3" style="margin-left: 20px"></a>
+        </th:block>
     </div>
 
     <div>
@@ -49,12 +52,21 @@
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
             <thead class="thead-dark">
             <tr>
-                <th th:replace="~{fragments :: column_link('/products', 'id', 'ID', 'none')}" class="hideable-column"></th>
+                <th class="hideable-column">
+                <th th:replace="~{fragments :: column_link('/products', 'id', 'ID', 'tag')}"></th>
+                </th>
                 <th>Main Image</th>
                 <th th:replace="~{fragments :: column_link('/products', 'name', 'Product Name', 'none')}"></th>
-                <th th:replace="~{fragments :: column_link('/products', 'brand', 'Brand', 'none')}"></th>
-                <th th:replace="~{fragments :: column_link('/products', 'category', 'Category', 'none')}"></th>
-                <th th:replace="~{fragments :: column_link('/products','enabled', 'Enabled', 'none')}"></th>
+                <th class="hideable-column">
+                <th th:replace="~{fragments :: column_link('/products', 'brand', 'Brand', 'tag')}"></th>
+                </th>
+                <th class="hideable-column">
+                <th th:replace="~{fragments :: column_link('/products', 'category', 'Category', 'tag')}"></th>
+                </th>
+
+                <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                    <th th:replace="~{fragments :: column_link('/products','enabled', 'Enabled', 'none')}"></th>
+                </th:block>
                 <th></th>
             </tr>
             </thead>
@@ -69,18 +81,25 @@
                         [[${product.shortName}]]
                     </a>
                     </td>
-                <td>[[${product.brand.name}]]</td>
-                <td>[[${product.category.name}]]</td>
+                <td class="hideable-column">[[${product.brand.name}]]</td>
+                <td class="hideable-column">[[${product.category.name}]]</td>
+
+                <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
                 <td>
                     <div th:replace="~{fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})}"></div>
                 </td>
+                </th:block>
                 <td>
                     <a class="fa fa-file-alt fa-2x icon-green link-detail" th:href="@{'/products/detail/' + ${product.id}}" title="View details of this product">
                     </a>
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
                     &nbsp;&nbsp;
                     <div th:replace="~{fragments :: edit('product', '/products/edit/' + ${product.id})}"></div>
+                    </th:block>
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
                     &nbsp;&nbsp;
                     <div th:replace="~{fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)}"></div>
+                    </th:block>
                 </td>
             </tr>
             </tbody>
@@ -90,31 +109,27 @@
     <div class="less-details">
         <div th:each="product : ${listProducts}" class="row m-1">
             <div class="col-4">
-
+                <img th:src="@{${product.mainImagePath}}" style="width: 80px" class="img-fluid"/>
             </div>
             <div class="col-8">
-                <div>
-                    <img th:src="@{${product.mainImagePath}}" style="width: 120px" class="img-fluid" />
-                </div>
                 <div>
                     <a class="link-detail" th:href="@{'/products/detail/' + ${product.id}}" th:title="${product.name}">
                         [[${product.shortName}]]
                     </a>
                 </div>
-                <div>[[${product.brand.name}]]</div>
-                <div>[[${product.category.name}]]</div>
-                <div>
-                    <div th:replace="~{fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})}"></div>
-                </div>
-                <div>
-                    <a class="fa fa-file-alt fa-2x icon-green link-detail" th:href="@{'/products/detail/' + ${product.id}}" title="View details of this product">
+                <div class="mt-2">
+                    <a class="fa fa-file-alt fa-2x icon-green link-detail" th:href="@{'/products/detail/' + ${product.id}}">
                     </a>
-                    &nbsp;&nbsp;
-                    <div th:replace="~{fragments :: edit('product', '/products/edit/' + ${product.id})}"></div>
-                    &nbsp;&nbsp;
-                    <div th:replace="~{fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)}"></div>
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
+                        &nbsp;&nbsp;
+                        <div th:replace="~{fragments :: edit('product', '/products/edit/' + ${product.id})}"></div>
+                    </th:block>
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                        &nbsp;&nbsp;
+                        <div th:replace="~{fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)}"></div>
+                    </th:block>
                 </div>
-            </div>
+
             <div>&nbsp;</div>
         </div>
 

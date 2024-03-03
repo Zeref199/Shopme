@@ -1,4 +1,4 @@
-package com.shopme.admin.product;
+package com.shopme.admin.product.controller;
 
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.common.entity.Product;

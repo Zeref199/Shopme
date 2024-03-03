@@ -1,8 +1,10 @@
-package com.shopme.admin.product;
+package com.shopme.admin.product.controller;
 
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.brand.service.BrandService;
 import com.shopme.admin.category.service.CategoryService;
+import com.shopme.admin.product.ProductNotFoundException;
+import com.shopme.admin.product.service.ProductService;
 import com.shopme.admin.security.ShopmeUserDetails;
 import com.shopme.common.entity.Brand;
 import com.shopme.common.entity.Category;

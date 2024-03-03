@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: page_head('Error - Shopme', '/css/errorPageStyle.css', 'none')}"></head>
+<body>
+
+<div class="container">
+  <h1>Error</h1>
+  <p>Oops!  an unexpected error has occurred.</p>
+  <p>Go back to <a th:href="@{/}">homepage</a>.</p>
+</div>
+
+
+</body>
+</html>

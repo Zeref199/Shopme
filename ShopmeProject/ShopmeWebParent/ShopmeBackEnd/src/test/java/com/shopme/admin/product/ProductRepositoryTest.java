@@ -1,5 +1,6 @@
 package com.shopme.admin.product;
 
+import com.shopme.admin.product.repo.ProductRepository;
 import com.shopme.common.entity.Brand;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Product;

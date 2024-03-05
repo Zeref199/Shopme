@@ -14,9 +14,9 @@ public class Product {
     private String name;
     @Column(unique = true, length = 256, nullable = false)
     private String alias;
-    @Column(name = "short_description", length = 1000, nullable = false)
+    @Column(name = "short_description", length = 5000, nullable = false)
     private String shortDescription;
-    @Column(name = "full_description", length = 4096, nullable = false)
+    @Column(name = "full_description", length = 10000, nullable = false)
     private String fullDescription;
     @Column(name= "created_time")
     private Date createdTime;

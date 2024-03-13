@@ -153,7 +153,7 @@
 
         $(".link-detail").on("click", function (e){
             e.preventDefault();
-            linkDetailURL = $(this).attr("href");
+            let linkDetailURL = $(this).attr("href");
             $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
         });
         $("#dropdownCategory").on("change", function(){

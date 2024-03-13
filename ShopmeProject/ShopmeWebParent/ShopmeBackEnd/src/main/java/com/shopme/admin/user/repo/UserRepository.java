@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     public User getUserByEmail(@Param("email") String email);
 
     public Long countById(Integer id);
+
     @Query("SELECT u FROM User u WHERE CONCAT(u.id, ' ', u.email, ' ', u.firstName, ' ', u.lastName) LIKE %?1%")
     public Page<User> findAll(String keyword, Pageable pageable);
 

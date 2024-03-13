@@ -71,6 +71,9 @@ function deleteState(){
 }
 
 function updateState(){
+
+    if(!validateFormCountry()) return;
+
     let url = contextPath + "states/save";
     let stateId = dropDownStates.val();
     let stateName = fieldStateName.val();
@@ -99,7 +102,19 @@ function updateState(){
     });
 }
 
+function validateFormCountry(){
+    let formCountry = document.getElementById("formState");
+    if(!formCountry.checkValidity()){
+        formCountry.reportValidity();
+        return false;
+    }
+    return true;
+}
+
 function  addState(){
+
+    if(!validateFormCountry()) return;
+
     let url = contextPath + "states/save";
     let stateName = fieldStateName.val();
 

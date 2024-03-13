@@ -27,7 +27,7 @@ $(document).ready(function (){
     });
 
     buttonAddCountry.click(function(){
-        if(buttonAddCountry.val() === "Add" && (fieldCountryCode.val() !== "" || fieldCountryName.val() !== "")){
+        if(buttonAddCountry.val() === "Add"){
                 addCountry();
         }else{
             changeFormStateToNewCountry();
@@ -65,6 +65,9 @@ function deleteCountry(){
 }
 
 function updateCountry(){
+
+    if(!validateFormCountry()) return;
+
     let url = contextPath + "countries/save";
     let countryName = fieldCountryName.val();
     let countryCode = fieldCountryCode.val();
@@ -92,7 +95,19 @@ function updateCountry(){
     });
 }
 
+function validateFormCountry(){
+    let formCountry = document.getElementById("formCountry");
+    if(!formCountry.checkValidity()){
+        formCountry.reportValidity();
+        return false;
+    }
+    return true;
+}
+
 function  addCountry(){
+
+    if(!validateFormCountry()) return;
+
     let url = contextPath + "countries/save";
     let countryName = fieldCountryName.val();
     let countryCode = fieldCountryCode.val();

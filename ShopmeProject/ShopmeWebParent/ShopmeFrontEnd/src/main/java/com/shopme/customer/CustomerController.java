@@ -9,6 +9,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -22,13 +23,13 @@ import java.util.List;
 @Controller
 public class CustomerController {
     @Autowired
-    private CustomerService CustomerService;
+    private CustomerService customerService;
     @Autowired
     private SettingService settingService;
 
     @GetMapping("/register")
     public String showRegisterForm(Model model){
-        List<Country> listCountries = CustomerService.listAllCountries();
+        List<Country> listCountries = customerService.listAllCountries();
 
         model.addAttribute("listCountries", listCountries);
         model.addAttribute("pageTitle", "Customer Registration");
@@ -39,7 +40,7 @@ public class CustomerController {
 
     @PostMapping("/create_customer")
     public String createCustomer(Customer customer, Model model, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-        CustomerService.registerCustomer(customer);
+        customerService.registerCustomer(customer);
         sendVerificationEmail(request, customer);
 
         model.addAttribute("pageTitle", "Registration Succeeded");
@@ -75,6 +76,13 @@ public class CustomerController {
         System.out.println("to Address: " + toAddress);
         System.out.println("Verify URL: " + verifyURL);
 
+    }
+
+    @GetMapping("/verify")
+    public String verifyAccount(@Param("code") String code, Model model){
+         boolean verified = customerService.verify(code);
+
+         return "register/" + (verified ? "verify_success" : "verify_fail");
     }
 
 }

@@ -1,12 +1,14 @@
 package com.shopme.admin.customer.controller;
 
+import com.shopme.admin.customer.export.CustomerCsvExporter;
 import com.shopme.admin.customer.service.CustomerService;
+import com.shopme.admin.paging.PagingAndSortingHelper;
+import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.exception.CustomerNotFoundException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,34 +25,15 @@ public class CustomerController {
     private CustomerService service;
 
     @GetMapping("/customers")
-    public String listFirstPage(Model model){
-        return listByPage(1, model, "id", "asc", null);
+    public String listFirstPage(){
+        return "redirect:/customers/page/1?sortField=firstName&sortDir=asc";
     }
 
     @GetMapping("/customers/page/{pageNum}")
-    public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model,
-                             @Param("sortField") String sortField, @Param("sortDir") String sortDir, @Param("keyword") String keyword){
-        Page<Customer> page = service.listByPage(pageNum, sortField, sortDir, keyword);
-        List<Customer> listCustomers = page.getContent();
+    public String listByPage(@PagingAndSortingParam(listName = "listCustomers", moduleURL = "/customers") PagingAndSortingHelper helper,
+                             @PathVariable(name = "pageNum") int pageNum){
 
-        long startCount = (long) (pageNum - 1) * CustomerService.CUSTOMERS_PER_PAGE + 1;
-        long endCount = startCount + CustomerService.CUSTOMERS_PER_PAGE - 1;
-        if(endCount > page.getTotalElements()){
-            endCount = page.getTotalElements();
-        }
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-
-        model.addAttribute("currentPage", pageNum);
-        model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("startCount", startCount);
-        model.addAttribute("endCount", endCount);
-        model.addAttribute("totalItems", page.getTotalElements());
-        model.addAttribute("listCustomers", listCustomers);
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
-        model.addAttribute("keyword", keyword);
+        service.listByPage(pageNum, helper);
 
         return "customers/customers";
     }
@@ -112,6 +95,13 @@ public class CustomerController {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }
         return "redirect:/customers";
+    }
+
+    @GetMapping("/customers/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        List<Customer> listCustomers = service.listAllCustomers();
+        CustomerCsvExporter exporter = new CustomerCsvExporter();
+        exporter.export(listCustomers, response);
     }
 
 

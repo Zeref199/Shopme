@@ -69,8 +69,8 @@
       moduleURL = "[[@{/brands}]]";
 
       $(document).ready(function(){
-          dropdownCategories = $("#categories");
-          divChosenCategories = $("#chosenCategories");
+          let dropdownCategories = $("#categories");
+          let divChosenCategories = $("#chosenCategories");
 
           dropdownCategories.change(function (){
               divChosenCategories.empty();
@@ -82,24 +82,24 @@
 
       function showChosenCategories(){
           dropdownCategories.children("option:selected").each(function(){
-              selectedCategory = $(this);
-              catId = selectedCategory.val();
-              catName = selectedCategory.text().replace(/-/g, "");
+              let selectedCategory = $(this);
+              let catId = selectedCategory.val();
+              let catName = selectedCategory.text().replace(/-/g, "");
 
               divChosenCategories.append("<span class='badge badge-secondary m-1'>" + catName + "</span>");
           })
       }
 
       function checkUnique(form){
-          brandId = $("#id").val();
-          brandName = $("#name").val();
+          let brandId = $("#id").val();
+          let brandName = $("#name").val();
 
 
           csrfValue = $("input[name='_csrf']").val();
 
-          url = "[[@{/brands/check_unique}]]";
+          let url = "[[@{/brands/check_unique}]]";
 
-          params = {id: brandId, name: brandName, _csrf: csrfValue};
+          let params = {id: brandId, name: brandName, _csrf: csrfValue};
 
           $.post(url, params, function(response){
               if(response == "OK"){

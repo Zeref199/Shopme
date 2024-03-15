@@ -1,5 +1,6 @@
 package com.shopme.customer;
 
+import com.shopme.common.entity.AuthenticationType;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.Customer;
 import org.junit.jupiter.api.Test;
@@ -113,5 +114,15 @@ public class CustomerRepositoryTests {
 
         Optional<Customer> findById = repo.findById(customerId);
         assertThat(findById).isNotPresent();
+    }
+
+    @Test
+    public void testUpdateAuthenticationType(){
+        Integer id = 1;
+        repo.updateAuthenticationType(id, AuthenticationType.DATABASE);
+
+        Customer customer = repo.findById(id).get();
+
+        assertThat(customer.getAuthenticationType()).isEqualTo(AuthenticationType.DATABASE);
     }
 }

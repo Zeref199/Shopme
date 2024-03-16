@@ -1,5 +1,8 @@
 package com.shopme.security;
 
+import com.shopme.security.oauth.CustomerOAuth2UserService;
+import com.shopme.security.oauth.OAuth2LoginSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,6 +17,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+    @Autowired
+    private CustomerOAuth2UserService oAuth2UserService;
+
+    @Autowired
+    private OAuth2LoginSuccessHandler oAuth2LoginHandler;
+    @Autowired
+    private DatabaseLoginSuccessHandler databaseLoginHandler;
 
     @Bean
     public UserDetailsService UserDetailsService(){
@@ -42,7 +53,15 @@ public class WebSecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
+                        .successHandler(databaseLoginHandler)
                         .permitAll())
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login") // Set the login page
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userService(oAuth2UserService) // Inject your OAuth2UserService
+                        )
+                        .successHandler(oAuth2LoginHandler)
+                )
                 .logout((logout) -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")

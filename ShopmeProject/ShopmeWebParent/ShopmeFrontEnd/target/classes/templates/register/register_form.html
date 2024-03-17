@@ -116,48 +116,13 @@
           </div>
       </form>
       <div>&nbsp;</div>
-
       <div th:replace="~{fragments :: modal_dialog}"></div>
       <div th:replace="~{navigation :: footer_menu}"></div>
     </div>
 
+
     <script type="text/javascript">
       contextPath = "[[@{/}]]";
-      let dropDownCountry;
-      let dataListState;
-      let fieldState;
-
-      $(document).ready(function (){
-        dropDownCountry = $("#country");
-        dataListState = $("#listStates");
-        fieldState = $("#state");
-
-        dropDownCountry.on("change", function (){
-          loadStatesForCountry();
-          fieldState.val("").focus();
-        });
-      });
-      function loadStatesForCountry(){
-        let selectedCountry = $("#country option:selected");
-        let countryId = selectedCountry.val();
-        let url = contextPath + "settings/list_states_by_country/" + countryId;
-
-        $.get(url, function (responseJSON){
-          dataListState.empty();
-
-          $.each(responseJSON, function (index, state){
-            $("<option>").val(state.name).text(state.name).appendTo(dataListState);
-          })
-        })
-      }
-      function checkPasswordMatch(confirmPassword){
-        if(confirmPassword.value != $("#password").val()){
-          confirmPassword.setCustomValidity("Passwords do not match!");
-        }else{
-          confirmPassword.setCustomValidity("");
-        }
-      }
-
       function checkEmailUnique(form){
         let url = contextPath + "customers/check_unique_email";
         let customerEmail = $("#email").val();
@@ -180,19 +145,8 @@
         return false;
       }
 
-      function showModalDialog(title, message){
-        $("#modalTitle").text(title);
-        $("#modalBody").text(message);
-        $("#modalDialog").modal();
-      }
-      function showErrorModal(message){
-        showModalDialog("Error", message);
-      }
-      function showWarningModal(message){
-        showModalDialog("Warning", message);
-      }
-
     </script>
+    <script type="text/javascript" th:src="@{/js/common_customer_form.js}"></script>
 
 </body>
 </html>

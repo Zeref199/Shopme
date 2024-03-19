@@ -2,6 +2,7 @@ package com.shopme.setting;
 
 import com.shopme.common.entity.Setting;
 import com.shopme.common.entity.SettingCategory;
+import com.shopme.setting.repo.SettingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

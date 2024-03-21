@@ -8,6 +8,11 @@ $(document).ready(function (){
       evt.preventDefault();
       increaseQuantity($(this));
   });
+
+    $(".linkRemove").on("click", function (evt){
+        evt.preventDefault();
+        removeProduct($(this));
+    });
 });
 
 function decreaseQuantity(link){
@@ -60,11 +65,54 @@ function updateSubtotal(updatedSubtotal, productId){
 
 function updateTotal(){
     let total = 0.00;
+    let productCount = 0;
 
     $(".subtotal").each(function (index, element){
+        productCount++;
         total += parseFloat(element.innerHTML.replaceAll(",", ""));
     });
 
-    let formattedTotal = $.number(total, 2);
-    $("#total").text(formattedTotal);
+    if(productCount < 1){
+        showEmptyShoppingCart();
+    }else{
+        let formattedTotal = $.number(total, 2);
+        $("#total").text(formattedTotal);
+    }
+}
+
+function showEmptyShoppingCart(){
+    $("#sectionTotal").hide();
+    $("#sectionEmptyCartMessage").removeClass("d-none");
+}
+
+function removeProduct(link) {
+    let url = link.attr("href");
+
+    $.ajax({
+        type: "DELETE",
+        url: url,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeaderName, csrfValue);
+        }
+    }).done(function(response) {
+        let rowNumber = link.attr("rowNumber");
+        removeProductHTML(rowNumber);
+        updateTotal();
+        updateCountNumbers();
+
+        showModalDialog("Shopping Cart", response);
+
+    }).fail(function() {
+        showErrorModal("Error while removing product.");
+    });
+}
+
+function removeProductHTML(rowNumber) {
+    $("#row" + rowNumber).remove();
+}
+
+function updateCountNumbers() {
+    $(".divCount").each(function(index, element) {
+        element.innerHTML = "" + (index + 1);
+    });
 }

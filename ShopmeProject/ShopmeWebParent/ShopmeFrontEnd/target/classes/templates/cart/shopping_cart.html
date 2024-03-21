@@ -4,69 +4,78 @@
 
 <body>
 <div class="container-fluid">
+  <!-- Header and search navigation -->
   <div th:replace="~{navigation :: header_menu}"></div>
   <div th:replace="~{navigation :: search_nav}"></div>
-    <div class="text-center">
-      <h2>Your Shopping Cart</h2>
-    </div>
 
-  <div class="row m-1">
-    <div class="col-sm-8">
-      <th:block th:each="item, status : ${cartItems}">
-        <div class="row border rounded p-1" th:with="product = ${item.product}">
-          <div class="col-1">
-            <div>[[${status.count}]]</div>
-            <div>
-              <a class="fas fa-trash" href=""></a>
-            </div>
+  <!-- Shopping Cart Title -->
+  <div class="text-center my-4">
+    <h1 class="display-4">Your Shopping Cart</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Cart items -->
+      <div th:each="item, status : ${cartItems}" th:with="product = ${item.product}" th:id="'row' + ${status.count}" class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <div class="divCount ml-2">[[${status.count}]]</div>
+            <img th:src="@{${product.mainImagePath}}" class="img-fluid rounded-start" alt="Product Image">
           </div>
-          <div></div>
-          <div class="col-3">
-            <img th:src="@{${product.mainImagePath}}" class="img-fluid" />
-          </div>
-          <div class="col-6">
-            <div>
-              <a th:href="@{'/p/' + ${product.alias}}" target="_blank" th:title="${product.name}">
-                <b>[[${product.shortName}]]</b>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a th:href="@{'/p/' + ${product.alias}}" target="_blank" th:title="${product.name}">
+                  [[${product.shortName}]]
+                </a>
+              </h5>
+              <p class="card-text">
+                <div th:replace="~{cart/quantity_control :: quantity_control(${item.quantity}, ${product.id})}"></div>
+              </p>
+
+              <p class="card-text">
+                Product Price: <div th:replace="~{product/product_fragment :: product_price}"></div>
+              </p>
+
+              <p class="card-text">
+                SubTotal:
+                <span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
+                <span th:id="'subtotal' + ${product.id}" class="h4 subtotal">[[${#numbers.formatDecimal(item.subtotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span>
+                <span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
+              </p>
+              <a class="btn btn-sm btn-outline-danger linkRemove" th:rowNumber="${status.count}" th:href="@{'/cart/remove/' + ${product.id}}">
+                <i class="fas fa-trash me-1"></i> Remove
               </a>
-            </div>
-            <div th:replace="~{cart/quantity_control :: quantity_control(${item.quantity}, ${product.id})}"></div>
-            <div>
-              <span>X&nbsp;</span>
-              <div th:replace="~{product/product_fragment :: product_price}"></div>
-            </div>
-            <div>
-              <span>=&nbsp;</span>
-              <span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
-              <span th:id="'subtotal' + ${product.id}" class="h4 subtotal">[[${#numbers.formatDecimal(item.subtotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span>
-              <span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
             </div>
           </div>
         </div>
-        <div class="row m-1">&nbsp;</div>
-      </th:block>
+      </div>
     </div>
 
-    <div class="col-sm-4" th:unless="${#lists.isEmpty(cartItems)}">
-      <div>
-        <span class="h3">Estimated Total:</span>
-      </div>
-      <div class="mt-2">
-        <span>=&nbsp;</span>
-        <span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
-        <span th:id="total" class="h2">[[${#numbers.formatDecimal(estimatedTotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span>
-        <span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
-      </div>
-      <div class="mt-2">
-        <button class="btn btn-danger p-3 mt-2">Check Out</button>
+    <div class="col-lg-4" id="sectionTotal">
+      <!-- Cart summary -->
+      <div th:unless="${#lists.isEmpty(cartItems)}">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Estimated Total:</h5>
+            <h3 class="card-text">
+              <span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
+              <span th:id="total" class="h2">[[${#numbers.formatDecimal(estimatedTotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span>
+              <span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
+            </h3>
+            <a class="btn btn-primary btn-lg btn-block mt-3" href="#" role="button">Proceed to Checkout</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="text-center" th:if="${#lists.isEmpty(cartItems)}">
-      <h3>You have not chosen any products yet.</h3>
+  <!-- Empty cart message -->
+  <div id="sectionEmptyCartMessage" th:class="'text-center my-4' + (${#lists.isEmpty(cartItems)} ? '' : ' d-none')">
+    <h3 class="display-5">Your shopping cart is empty.</h3>
   </div>
 
+  <!-- Modal dialog and footer navigation -->
   <div th:replace="~{fragments :: modal_dialog}"></div>
   <div th:replace="~{navigation :: footer_menu}"></div>
 </div>

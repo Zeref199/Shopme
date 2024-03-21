@@ -9,7 +9,6 @@ import com.shopme.common.entity.Category;
 import com.shopme.common.exception.CategoryNotFoundException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -29,12 +28,12 @@ public class CategoryController {
     @Autowired
     private CategoryService service;
     @GetMapping("/categories")
-    public String listFirstPage(@Param("sortDir") String sortDir, Model model){
+    public String listFirstPage(String sortDir, Model model){
         return listByPage(1, sortDir, null, model);
     }
 
     @GetMapping("/categories/page/{pageNum}")
-    public String listByPage(@PathVariable(name = "pageNum") int pageNum, @Param("sortDir") String sortDir, @Param("keyword") String keyword,  Model model){
+    public String listByPage(@PathVariable(name = "pageNum") int pageNum, String sortDir, String keyword,  Model model){
 
         if(sortDir == null || sortDir.isEmpty()){
             sortDir = "asc";

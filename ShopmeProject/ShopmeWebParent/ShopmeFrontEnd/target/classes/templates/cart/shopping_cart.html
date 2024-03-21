@@ -85,6 +85,10 @@
   let csrfHeaderName = "[[${_csrf.headerName}]]";
   let csrfValue = "[[${_csrf.token}]]";
 
+  let decimalDigits = [[${DECIMAL_DIGITS}]];
+  let decimalPointType = "[[${DECIMAL_POINT_TYPE}]]";
+  let thousandsPointType = "[[${THOUSANDS_POINT_TYPE}]]";
+
 </script>
 <script type="text/javascript" th:src="@{/js/jquery.number.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/shopping_cart.js}"></script>

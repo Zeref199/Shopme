@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments :: page_head(${pageTitle},'/css/style.css', 'none')"></head>
+<head th:replace="~{fragments :: page_head(${pageTitle},'/css/style.css', 'none')}"></head>
 
 <body>
 <div class="container-fluid">
-    <div th:replace="navigation :: menu"></div>
+    <div th:replace="~{navigation :: menu}"></div>
 
     <div>
         <h2>Manage Shipping Rates | [[${pageTitle}]]</h2>
@@ -72,8 +72,8 @@
         </div>
     </form>
 
-    <div th:replace="modal_fragments :: modal_dialog"></div>
-    <div th:replace="fragments :: footer"></div>
+    <div th:replace="~{modal_fragments :: modal_dialog}"></div>
+    <div th:replace="~{fragments :: footer}"></div>
 </div>
 <script type="text/javascript">
     contextPath = "[[@{/}]]";

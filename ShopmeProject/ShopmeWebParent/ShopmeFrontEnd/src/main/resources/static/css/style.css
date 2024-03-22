@@ -21,3 +21,18 @@
     div.less-details { display: none; }
     .hideable-column { display: table-cell }
 }
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-menu {
+    margin-top: 100px;
+}

@@ -1,7 +1,7 @@
 package com.shopme.security;
 
 import com.shopme.common.entity.Customer;
-import com.shopme.customer.CustomerRepository;
+import com.shopme.customer.repo.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -2,7 +2,7 @@ package com.shopme.security.oauth;
 
 import com.shopme.common.entity.AuthenticationType;
 import com.shopme.common.entity.Customer;
-import com.shopme.customer.CustomerService;
+import com.shopme.customer.service.CustomerService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

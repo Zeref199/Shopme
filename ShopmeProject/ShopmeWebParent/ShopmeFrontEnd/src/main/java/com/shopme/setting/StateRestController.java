@@ -3,6 +3,7 @@ package com.shopme.setting;
 import com.shopme.common.entity.Country;
 import com.shopme.common.entity.State;
 import com.shopme.common.entity.StateDTO;
+import com.shopme.setting.repo.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

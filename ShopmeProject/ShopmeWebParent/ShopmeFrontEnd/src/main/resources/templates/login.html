@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments :: page_head('Shopme', style, 'none')}"></head>
+<head th:replace="~{fragments :: page_head('Shopme', '/css/style.css', 'none')}"></head>
 <body>
-<div class="container-fluid text-center">
+<div class="container-fluid text-center wrapper">
     <div th:replace="navigation :: header_menu"></div>
     <div>
           <h2>Customer Login</h2>
@@ -18,7 +18,7 @@
 
     <div>&nbsp;</div>
 
-    <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
+    <form th:action="@{/login}" method="post" style="max-width: 500px; margin: 0 auto">
         <div th:if="${param.error}">
               <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
         </div>
@@ -38,7 +38,10 @@
             <p>
                 <input type="submit" value="Login" class="btn btn-primary" />
             </p>
+
         </div>
+
+
 
     </form>
     <div>&nbsp;</div>

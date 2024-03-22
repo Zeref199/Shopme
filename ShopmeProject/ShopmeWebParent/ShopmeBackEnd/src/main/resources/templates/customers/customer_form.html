@@ -107,40 +107,6 @@
       <div th:replace="~{fragments :: footer}"></div>
   </div>
   <script type="text/javascript">
-      let dropDownCountries;
-      let dropDownStates;
-
-      $(document).ready(function (){
-          dropDownCountries = $("#country");
-          dropDownStates = $("#listStates");
-
-          dropDownCountries.on("change", function (){
-              loadStates4Country();
-              $("#state").val("").focus();
-          });
-
-          loadStates4Country();
-
-          $('#buttonCancel').click(function (){
-              window.location = "[[@{/customers}]]";
-          });
-      });
-
-      function loadStates4Country(){
-          let selectedCountry = $("#country option:selected");
-          let countryId = selectedCountry.val();
-          let url = "[[@{/states/list_by_country/}]]" + countryId;
-
-          $.get(url, function (responseJSON){
-              dropDownStates.empty();
-
-              $.each(responseJSON, function (index, state){
-                  $("<option>").val(state.name).text(state.name).appendTo(dropDownStates);
-              });
-          }).fail(function (){
-              showToastMessage("ERROR loading states for the selected country.");
-          });
-      }
       function checkEmailUnique(form){
           let customerEmail = $("#email").val();
           let customerId = $("#id").val();
@@ -165,6 +131,7 @@
 
   </script>
   <script th:src="@{/js/common_form.js}"></script>
+  <script th:src="@{/js/common_form_country_state.js}"></script>
 </body>
 
 </html>

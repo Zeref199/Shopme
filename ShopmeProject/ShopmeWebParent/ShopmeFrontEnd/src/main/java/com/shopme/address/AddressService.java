@@ -2,12 +2,14 @@ package com.shopme.address;
 
 import com.shopme.common.entity.Address;
 import com.shopme.common.entity.Customer;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class AddressService {
     @Autowired
     private AddressRepository repo;

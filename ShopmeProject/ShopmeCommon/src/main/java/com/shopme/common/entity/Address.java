@@ -156,7 +156,7 @@ public class Address {
             address += ", " + city;
         }
         if(state != null && !state.isEmpty()){
-            address += " " + state;
+            address += " " + state + " ";
         }
         address += country.getName();
         if(!postalCode.isEmpty()) address += ". Postal Code: " + postalCode;

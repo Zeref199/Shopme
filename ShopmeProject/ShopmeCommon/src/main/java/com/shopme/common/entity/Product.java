@@ -58,6 +58,10 @@ public class Product {
         this.id = id;
     }
 
+    public Product(String name) {
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

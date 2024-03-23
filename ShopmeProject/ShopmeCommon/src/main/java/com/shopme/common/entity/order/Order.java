@@ -279,4 +279,13 @@ public class Order {
         return "Order [id=" + id + ", subtotal=" + subtotal + ", paymentMethod=" + paymentMethod + ", status=" + status
                 + ", customer=" + customer.getFullName() + "]";
     }
+
+    @Transient
+    public String getDestination() {
+        String destination =  city + ", ";
+        if (state != null && !state.isEmpty()) destination += state + ", ";
+        destination += country;
+
+        return destination;
+    }
 }

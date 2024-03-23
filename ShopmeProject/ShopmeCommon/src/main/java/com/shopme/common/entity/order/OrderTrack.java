@@ -1,15 +1,13 @@
 package com.shopme.common.entity.order;
 
+import com.shopme.common.entity.IdBasedEntity;
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "order_track")
-public class OrderTrack {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+public class OrderTrack extends IdBasedEntity {
 
     @Column(length = 256)
     private String notes;

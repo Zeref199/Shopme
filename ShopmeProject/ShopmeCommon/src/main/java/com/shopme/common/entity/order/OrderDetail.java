@@ -1,15 +1,13 @@
 package com.shopme.common.entity.order;
 
 import com.shopme.common.entity.Category;
-import com.shopme.common.entity.Product;
+import com.shopme.common.entity.IdBasedEntity;
+import com.shopme.common.entity.product.Product;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "order_details")
-public class OrderDetail {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+public class OrderDetail extends IdBasedEntity {
     private int quantity;
     private float productCost;
     private float shippingCost;
@@ -42,14 +40,6 @@ public class OrderDetail {
         this.productCost = productCost * quantity;
         this.shippingCost = shippingCost;
         this.subtotal = subtotal;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public int getQuantity() {

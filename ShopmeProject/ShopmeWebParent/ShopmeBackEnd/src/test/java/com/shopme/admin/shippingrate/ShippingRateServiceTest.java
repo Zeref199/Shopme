@@ -1,7 +1,7 @@
 package com.shopme.admin.shippingrate;
 
 import com.shopme.admin.product.repo.ProductRepository;
-import com.shopme.common.entity.Product;
+import com.shopme.common.entity.product.Product;
 import com.shopme.common.entity.ShippingRate;
 import com.shopme.common.exception.ShippingRateNotFoundException;
 import org.junit.jupiter.api.Test;

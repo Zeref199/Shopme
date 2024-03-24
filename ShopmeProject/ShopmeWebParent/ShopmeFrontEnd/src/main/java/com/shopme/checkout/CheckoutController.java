@@ -48,6 +48,11 @@ public class CheckoutController {
         List<CartItem> cartItems = cartService.listCartItems(customer);
         CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 
+        for (CartItem cart : cartItems) {
+            System.out.println("hi");
+            System.out.println(cart.getShippingCost());
+        }
+
         model.addAttribute("customer", customer);
         model.addAttribute("checkoutInfo", checkoutInfo);
         model.addAttribute("cartItems", cartItems);

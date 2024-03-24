@@ -48,7 +48,7 @@ public class CartItem extends IdBasedEntity{
     }
 
     public void setShippingCost(float shippingCost) {
-
+        this.shippingCost = shippingCost;
     }
 
     @Override

@@ -13,6 +13,8 @@ public class CartItem extends IdBasedEntity{
     @JoinColumn(name = "product_id")
     private Product product;
     private int quantity;
+    @Transient
+    private float shippingCost;
 
     public CartItem() {
     }
@@ -40,6 +42,14 @@ public class CartItem extends IdBasedEntity{
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    @Transient
+    public float getShippingCost() {
+        return shippingCost;
+    }
+
+    public void setShippingCost(float shippingCost) {
+
+    }
 
     @Override
     public String toString() {
@@ -54,4 +64,6 @@ public class CartItem extends IdBasedEntity{
     public float getSubtotal(){
         return product.getDiscountPrice() * quantity;
     }
+
+
 }

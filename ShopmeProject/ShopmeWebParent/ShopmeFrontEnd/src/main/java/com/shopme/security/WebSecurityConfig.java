@@ -53,13 +53,13 @@ public class WebSecurityConfig {
                                                  "/place_order", "/process_paypal_order")
                         .authenticated())
                 .formLogin((formLogin) -> formLogin
-                        .loginPage("/login")
+                        .loginPage("/login2")
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .successHandler(databaseLoginHandler)
                         .permitAll())
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login") // Set the login page
+                        .loginPage("/login2") // Set the login page
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oAuth2UserService) // Inject your OAuth2UserService
                         )
@@ -67,7 +67,7 @@ public class WebSecurityConfig {
                 )
                 .logout((logout) -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessUrl("/login2?logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll())

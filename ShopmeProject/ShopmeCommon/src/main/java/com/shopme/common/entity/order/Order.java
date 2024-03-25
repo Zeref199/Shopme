@@ -5,6 +5,8 @@ import com.shopme.common.entity.Address;
 import com.shopme.common.entity.Customer;
 import jakarta.persistence.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
@@ -223,6 +225,12 @@ public class Order extends AbstractAddress {
         if (!phoneNumber.isEmpty()) address += ". Phone Number: " + phoneNumber;
 
         return address;
+    }
+
+    @Transient
+    public String getDeliverDateOnForm(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(this.deliverDate);
     }
 
 }

@@ -63,7 +63,24 @@
               <span th:id="total" class="h2">[[${#numbers.formatDecimal(estimatedTotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span>
               <span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
             </h3>
-            <a class="btn btn-primary btn-lg btn-block mt-3" href="#" role="button">Proceed to Checkout</a>
+            <div th:if="${shippingSupported}">
+              <form th:action="@{/checkout}">
+                <button type="submit" class="btn btn-primary btn-lg btn-block mt-3">Proceed to Checkout</button>
+              </form>
+            </div>
+            <div th:unless="${shippingSupported}">
+              <div>
+                <span class="h5 text-warning">No shipping available for your location</span>
+              </div>
+
+              <div th:if="${usePrimaryAddressAsDefault}">
+                <a th:href="@{/account_details(redirect=cart)}" class="h6">Update your address</a>
+              </div>
+
+              <div th:unless="${usePrimaryAddressAsDefault}">
+                <a th:href="@{/address_book(redirect=cart)}" class="h6">Use another shipping address</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

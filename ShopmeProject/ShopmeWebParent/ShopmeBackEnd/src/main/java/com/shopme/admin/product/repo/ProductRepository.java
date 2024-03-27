@@ -37,4 +37,9 @@ public interface ProductRepository extends SearchRepository<Product, Integer> {
                                            @Param("categoryIdMatch") String categoryIdMatch,
                                            @Param("keyword") String keyword ,Pageable pageable);
 
+    @Query("SELECT p FROM Product p WHERE p.name LIKE %?1%")
+    public Page<Product> searchProductsByName(String keyword, Pageable pageable);
+
+
+
 }

@@ -6,6 +6,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +35,9 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authenticationProvider(authenticationProvider())
+        http.headers((headers)-> headers
+                .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+                .authenticationProvider(authenticationProvider())
                 .authorizeRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/users/**", "/settings/**", "/countries/**", "/states/**").hasAuthority("Admin")
                         .requestMatchers("/categories/**").hasAnyAuthority("Admin", "Editor")
@@ -44,7 +47,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/products", "/products/", "/products/detail/**", "/products/page/**").hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
                         .requestMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
                         .requestMatchers("/customers/**").hasAnyAuthority("Admin", "Salesperson")
-                        .requestMatchers("/shipping/**").hasAnyAuthority("Admin", "Salesperson")
+                        .requestMatchers("/shipping/**", "get_shipping_cost").hasAnyAuthority("Admin", "Salesperson")
                         .requestMatchers("/orders/**").hasAnyAuthority("Admin", "Salesperson", "Shipper")
                         .requestMatchers("/report/**").hasAnyAuthority("Admin", "Salesperson")
                         .requestMatchers("/articles/**").hasAnyAuthority("Admin", "Editor")
@@ -65,6 +68,7 @@ public class WebSecurityConfig {
                 .rememberMe((remember) -> remember
                         .key("ajhsgduqywbh_1234567890")
                         .tokenValiditySeconds(7 * 24 * 60 * 60));
+
 
         return http.build();
     }

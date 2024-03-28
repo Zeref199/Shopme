@@ -37,7 +37,6 @@ public class ShippingRateServiceTest {
         Mockito.when(shipRepo.findByCountryAndState(countryId, state)).thenReturn(null);
 
         assertThrows(ShippingRateNotFoundException.class, new Executable() {
-
             @Override
             public void execute() throws Throwable {
                 shipService.calculateShippingCost(productId, countryId, state);

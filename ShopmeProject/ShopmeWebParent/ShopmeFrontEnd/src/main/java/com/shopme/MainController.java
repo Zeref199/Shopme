@@ -25,11 +25,11 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login2")
     public String viewLoginPage(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication == null || authentication instanceof AnonymousAuthenticationToken){
-            return "login";
+            return "login2";
         }
 
         return "redirect:/";

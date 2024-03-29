@@ -64,8 +64,7 @@
                   <a class="fas fa-file-alt fa-2x icon-green linkDetail"
                      th:href="@{'/orders/detail/' + ${order.id}}"></a>
 
-                  <th:block
-                          th:if="${order.returnRequested == false && order.delivered == true && order.returned == false}">
+                  <th:block th:if="${order.returnRequested == false && order.delivered == true && order.returned == false}">
                     &nbsp;
                     <a class="fas fa-undo fa-2x icon-dark linkReturnOrder"
                        href="" th:classappend="'linkReturn' + ${order.id}"
@@ -100,6 +99,8 @@
 
   <div th:replace="~{fragments :: pagination('/orders', 'orders')}"></div>
 
+  <div th:replace="~{orders/return_order_modal :: content}"></div>
+
   <div class="modal fade" id="orderDetailsModal">
     <div class="modal-dialog modal-xl">
       <div class="modal-content"></div>
@@ -111,24 +112,20 @@
 
 </div>
 
+<script th:src="@{/js/common_list.js}"></script>
+
 <script type="text/javascript">
   moduleURL = "[[@{/orders}]]";
-
-  function clearFilter(){
-    window.location = moduleURL;
-  }
+  contextPath = "[[@{/}]]";
+  let csrfHeaderName = "[[${_csrf.headerName}]]";
+  let csrfValue = "[[${_csrf.token}]]";
 
   $(document).ready(function () {
-    handleDetailLink();
+    handleDetailLink(".linkDetail", "#orderDetailsModal");
   });
-
-  function handleDetailLink(){
-    $(".linkDetail").on("click", function (e){
-      e.preventDefault();
-      $('#orderDetailsModal').modal('show').find('.modal-content').load($(this).attr('href'));
-    });
-  }
 </script>
+
+<script type="text/javascript" th:src="@{/js/return_order.js}"></script>
 
 </body>
 

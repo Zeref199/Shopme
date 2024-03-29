@@ -1,6 +1,6 @@
 package com.shopme.admin.category.controller;
 
-import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.AmazonS3Util;
 import com.shopme.admin.category.CategoryPageInfo;
 import com.shopme.admin.category.export.CategoryCsvExporter;
 import com.shopme.admin.category.service.CategoryService;
@@ -83,10 +83,10 @@ public class CategoryController {
                 category.setImage(fileName);
                 Category savedCategory = service.save(category);
 
-                String uploadDir = "../category-images/" + savedCategory.getId();
+                String uploadDir = "category-images/" + savedCategory.getId();
 
-                FileUploadUtil.cleanDir(uploadDir);
-                FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+                AmazonS3Util.removeFolder(uploadDir);
+                AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
             }else{
                 service.save(category);
             }
@@ -124,8 +124,8 @@ public class CategoryController {
     public String deleteUser(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes){
         try {
             service.delete(id);
-            String categoryDir = "../category-images/" + id;
-            FileUploadUtil.removeDir(categoryDir);
+            String categoryDir = "category-images/" + id;
+            AmazonS3Util.removeFolder(categoryDir);
             redirectAttributes.addFlashAttribute("message", "The categeroy ID: " + id + "has been deleted successfully");
         }catch(UserNotFoundException ex){
             redirectAttributes.addFlashAttribute("message", ex.getMessage());

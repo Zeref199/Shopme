@@ -1,5 +1,6 @@
 package com.shopme.setting;
 
+import com.shopme.common.Constants;
 import com.shopme.common.entity.setting.Setting;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,6 +30,8 @@ public class SettingFilter implements Filter {
         generalSettings.forEach(setting -> {
             request.setAttribute(setting.getKey(), setting.getValue());
         });
+
+        request.setAttribute("S3_BASE_URI", Constants.S3_BASE_URI);
 
         chain.doFilter(request, response);
     }

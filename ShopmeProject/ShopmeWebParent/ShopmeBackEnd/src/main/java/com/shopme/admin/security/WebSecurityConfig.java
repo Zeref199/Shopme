@@ -38,20 +38,30 @@ public class WebSecurityConfig {
         http.headers((headers)-> headers
                 .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authenticationProvider(authenticationProvider())
-                .authorizeRequests((authorizeRequests) -> authorizeRequests
+                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+                        .requestMatchers("/states/list_by_country/**").hasAnyAuthority("Admin", "Salesperson")
                         .requestMatchers("/users/**", "/settings/**", "/countries/**", "/states/**").hasAuthority("Admin")
-                        .requestMatchers("/categories/**").hasAnyAuthority("Admin", "Editor")
-                        .requestMatchers("/brands/**").hasAnyAuthority("Admin", "Editor")
-                        .requestMatchers("/products/edit/**", "/products/save", "/products/check_unique").hasAnyAuthority("Admin", "Editor", "Salesperson")
+                        .requestMatchers("/categories/**", "/brands/**").hasAnyAuthority("Admin", "Editor")
+
                         .requestMatchers("/products/new", "/products/delete/**").hasAnyAuthority("Admin", "Editor")
-                        .requestMatchers("/products", "/products/", "/products/detail/**", "/products/page/**").hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
+
+                        .requestMatchers("/products/edit/**", "/products/save", "/products/check_unique")
+                        .hasAnyAuthority("Admin", "Editor", "Salesperson")
+
+                        .requestMatchers("/products", "/products/", "/products/detail/**", "/products/page/**")
+                        .hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
+
                         .requestMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
-                        .requestMatchers("/customers/**").hasAnyAuthority("Admin", "Salesperson")
-                        .requestMatchers("/shipping/**", "get_shipping_cost").hasAnyAuthority("Admin", "Salesperson")
-                        .requestMatchers("/orders/**").hasAnyAuthority("Admin", "Salesperson", "Shipper")
-                        .requestMatchers("/report/**").hasAnyAuthority("Admin", "Salesperson")
-                        .requestMatchers("/articles/**").hasAnyAuthority("Admin", "Editor")
-                        .requestMatchers("/menus/**").hasAnyAuthority("Admin", "Editor")
+
+                        .requestMatchers("/orders", "/orders/", "/orders/page/**", "/orders/detail/**").hasAnyAuthority("Admin", "Salesperson", "Shipper")
+
+                        .requestMatchers("/products/detail/**", "/customers/detail/**").hasAnyAuthority("Admin", "Editor", "Salesperson", "Assistant")
+
+                        .requestMatchers("/customers/**", "/orders/**", "/get_shipping_cost", "/reports/**").hasAnyAuthority("Admin", "Salesperson")
+
+                        .requestMatchers("/orders_shipper/update/**").hasAuthority("Shipper")
+
+                        .requestMatchers("/reviews/**").hasAnyAuthority("Admin", "Assistant")
                         .anyRequest()
                         .authenticated())
                 .formLogin((formLogin) -> formLogin

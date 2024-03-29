@@ -1,4 +1,4 @@
-var trackRecordCount;
+let trackRecordCount;
 
 $(document).ready(function() {
     trackRecordCount = $(".hiddenTrackId").length;

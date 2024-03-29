@@ -313,4 +313,19 @@ public class Order extends AbstractAddress {
         return false;
     }
 
+    @Transient
+    public String getProductNames() {
+        StringBuilder productNames = new StringBuilder();
+
+        productNames = new StringBuilder("<ul>");
+
+        for (OrderDetail detail : orderDetails) {
+            productNames.append("<li>").append(detail.getProduct().getShortName()).append("</li>");
+        }
+
+        productNames.append("</ul>");
+
+        return productNames.toString();
+    }
+
 }

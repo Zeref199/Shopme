@@ -8,6 +8,7 @@
         <div class="m-2">
             <img alt="Main image preview" class="img-fluid" th:src="@{${product.mainImagePath}}" />
         </div>
+    </div>
 
     <th:block th:each="productImage, status : ${product.images}">
         <div class="col border m-3 p-2" >

@@ -138,6 +138,7 @@ public class OrderController {
         return defaultRedirectURL;
     }
 
+
     private void updateOrderTracks(Order order, HttpServletRequest request) {
         String[] trackIds = request.getParameterValues("trackId");
         String[] trackStatuses = request.getParameterValues("trackStatus");
@@ -146,6 +147,8 @@ public class OrderController {
 
         List<OrderTrack> orderTracks = order.getOrderTracks();
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+
+        String status = "";
 
         for (int i = 0; i < trackIds.length; i++) {
             OrderTrack trackRecord = new OrderTrack();
@@ -166,7 +169,12 @@ public class OrderController {
             }
 
             orderTracks.add(trackRecord);
+
+            status = String.valueOf(trackRecord.getStatus());
+
         }
+        order.setStatus(OrderStatus.valueOf(status));
+
     }
 
     private void updateProductDetails(Order order, HttpServletRequest request) {

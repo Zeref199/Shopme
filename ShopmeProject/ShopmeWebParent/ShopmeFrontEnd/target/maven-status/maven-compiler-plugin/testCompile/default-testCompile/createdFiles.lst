@@ -1,0 +1,9 @@
+com\shopme\product\ProductRepositoryTest.class
+com\shopme\shoppingcart\CartItemRepositoryTests.class
+com\shopme\address\AddressRepositoryTests.class
+com\shopme\customer\CustomerRepositoryTests.class
+com\shopme\shipping\ShippingRateRepositoryTests.class
+com\shopme\category\CategoryRepositoryTest.class
+com\shopme\order\OrderRestControllerTests.class
+com\shopme\setting\SettingRepositoryTest.class
+com\shopme\checkout\paypal\PayPalApiTests.class

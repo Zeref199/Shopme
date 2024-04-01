@@ -1,5 +1,6 @@
 package com.shopme.admin.order;
 
+import com.shopme.admin.order.repo.OrderRepository;
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.order.*;
 import com.shopme.common.entity.product.Product;
@@ -10,6 +11,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -176,6 +180,42 @@ public class OrderRepositoryTests {
         Order updatedOrder = repo.save(order);
 
         assertThat(updatedOrder.getOrderTracks()).hasSizeGreaterThan(1);
+    }
+
+    @Test
+    public void testAddTrackWithStatusNewToOrder() {
+        Integer orderId = 2;
+        Order order = repo.findById(orderId).get();
+
+        OrderTrack newTrack = new OrderTrack();
+        newTrack.setOrder(order);
+        newTrack.setUpdatedTime(new Date());
+        newTrack.setStatus(OrderStatus.NEW);
+        newTrack.setNotes(OrderStatus.NEW.defaultDescription());
+
+        List<OrderTrack> orderTracks = order.getOrderTracks();
+        orderTracks.add(newTrack);
+
+        Order updatedOrder = repo.save(order);
+
+        assertThat(updatedOrder.getOrderTracks()).hasSizeGreaterThan(1);
+    }
+
+    @Test
+    public void testFindByOrderTimeBetween() throws ParseException, ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date startTime = dateFormatter.parse("2024-03-22");
+        Date endTime = dateFormatter.parse("2024-03-31");
+
+        List<Order> listOrders = repo.findByOrderTimeBetween(startTime, endTime);
+
+        assertThat(listOrders.size()).isGreaterThan(0);
+
+        for (Order order : listOrders) {
+            System.out.printf("%s | %s | %.2f | %.2f | %.2f \n",
+                    order.getId(), order.getOrderTime(), order.getProductCost(),
+                    order.getSubtotal(), order.getTotal());
+        }
     }
 
 }

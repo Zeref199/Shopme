@@ -1,15 +1,14 @@
-// Sales Report by Category
-let data;
-let chartOptions;
 
 $(document).ready(function() {
     setupButtonEventHandlers("_category", loadSalesReportByDateForCategory);
 });
 
 function loadSalesReportByDateForCategory(period) {
+    let requestURL;
+
     if (period === "custom") {
-        startDate = $("#startDate_category").val();
-        endDate = $("#endDate_category").val();
+        let startDate = $("#startDate_category").val();
+        let endDate = $("#endDate_category").val();
 
         requestURL = contextPath + "reports/category/" + startDate + "/" + endDate;
     } else {

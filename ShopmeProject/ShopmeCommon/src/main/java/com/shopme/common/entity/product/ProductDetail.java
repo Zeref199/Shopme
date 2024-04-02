@@ -13,7 +13,7 @@ public class ProductDetail extends IdBasedEntity {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
+    @Transient
     private Integer status;
 
     public ProductDetail() {}

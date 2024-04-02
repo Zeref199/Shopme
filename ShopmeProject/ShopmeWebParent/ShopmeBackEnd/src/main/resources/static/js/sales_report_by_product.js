@@ -1,12 +1,10 @@
-let data;
-let chartOptions;
 
 $(document).ready(function() {
     setupButtonEventHandlers("_product", loadSalesReportByDateForProduct);
 });
 
 function loadSalesReportByDateForProduct(period) {
-    if (period == "custom") {
+    if (period === "custom") {
         let startDate = $("#startDate_product").val();
         let endDate = $("#endDate_product").val();
 

@@ -1,5 +1,6 @@
-package com.shopme.admin.order;
+package com.shopme.admin.order.controller;
 
+import com.shopme.admin.order.service.OrderService;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.admin.security.ShopmeUserDetails;

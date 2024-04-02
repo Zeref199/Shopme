@@ -1,4 +1,4 @@
-package com.shopme.admin.order;
+package com.shopme.admin.order.controller;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;

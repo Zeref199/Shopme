@@ -1,5 +1,6 @@
-package com.shopme.admin.order;
+package com.shopme.admin.order.service;
 
+import com.shopme.admin.order.repo.OrderRepository;
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.setting.country.CountryRepository;
 import com.shopme.common.entity.Country;

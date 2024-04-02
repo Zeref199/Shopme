@@ -1,5 +1,6 @@
-package com.shopme.admin.order;
+package com.shopme.admin.order.controller;
 
+import com.shopme.admin.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,18 +1,24 @@
 package com.shopme.admin.review;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
+import com.shopme.admin.product.repo.ProductRepository;
 import com.shopme.common.entity.Review;
 import com.shopme.common.exception.ReviewNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
 @Service
+@Transactional
 public class ReviewService {
     public static final int REVIEWS_PER_PAGE = 5;
 
-    @Autowired private ReviewRepository reviewRepo;
+    @Autowired
+    private ReviewRepository reviewRepo;
+    @Autowired
+    private ProductRepository productRepo;
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper) {
         helper.listEntities(pageNum, REVIEWS_PER_PAGE, reviewRepo);
@@ -32,6 +38,7 @@ public class ReviewService {
         reviewInDB.setComment(reviewInForm.getComment());
 
         reviewRepo.save(reviewInDB);
+        productRepo.updateReviewCountAndAverageRating(reviewInDB.getProduct().getId());
     }
 
     public void delete(Integer id) throws ReviewNotFoundException {

@@ -49,7 +49,7 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider())
                 .authorizeRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/account_details", "/update_account_details", "/orders/**",
-                                                 "/cart", "/address_book/**", "/checkout",
+                                                 "/cart", "/address_book/**", "/checkout", "/reviews/**",
                                                  "/place_order", "/process_paypal_order")
                         .authenticated())
                 .formLogin((formLogin) -> formLogin

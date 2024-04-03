@@ -2,6 +2,7 @@ package com.shopme.review;
 
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Review;
+import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.ReviewNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,12 @@ public class ReviewService {
 
         return review;
     }
+
+    public Page<Review> list3MostVotedReviewsByProduct(Product product) {
+        Sort sort = Sort.by("votes").descending();
+        Pageable pageable = PageRequest.of(0, 3, sort);
+
+        return reviewRepo.findByProduct(product, pageable);
+    }
+
 }

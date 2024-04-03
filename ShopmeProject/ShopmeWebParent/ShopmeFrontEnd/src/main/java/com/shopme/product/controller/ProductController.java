@@ -10,6 +10,7 @@ import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.product.service.ProductService;
 import com.shopme.review.ReviewService;
+import com.shopme.review.vote.ReviewVoteService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,8 @@ public class ProductController {
     private CategoryService categoryService;
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private ReviewVoteService voteService;
     @Autowired
     private ControllerHelper controllerHelper;
 
@@ -80,7 +83,7 @@ public class ProductController {
 
             if (customer != null) {
                 boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
-                //voteService.markReviewsVotedForProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
+                voteService.markReviewsVotedForProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
 
                 if (customerReviewed) {
                     model.addAttribute("customerReviewed", customerReviewed);

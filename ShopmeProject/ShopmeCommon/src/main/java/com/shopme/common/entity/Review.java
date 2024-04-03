@@ -93,5 +93,14 @@ public class Review extends IdBasedEntity{
                 + product.getShortName() + ", customer=" + customer.getFullName() + "]";
     }
 
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+
+
 
 }

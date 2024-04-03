@@ -50,7 +50,8 @@ public class WebSecurityConfig {
                 .authorizeRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/account_details", "/update_account_details", "/orders/**",
                                                  "/cart", "/address_book/**", "/checkout", "/reviews/**",
-                                                 "/place_order", "/process_paypal_order")
+                                                 "/place_order", "/process_paypal_order", "/write_review/**",
+                                                    "/post_review")
                         .authenticated())
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login2")

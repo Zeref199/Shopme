@@ -6,6 +6,7 @@ import com.shopme.common.entity.order.OrderStatus;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.ReviewNotFoundException;
 import com.shopme.order.OrderDetailRepository;
+import com.shopme.product.repo.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 @Transactional
@@ -22,6 +25,8 @@ public class ReviewService {
     private ReviewRepository reviewRepo;
     @Autowired
     private OrderDetailRepository orderDetailRepo;
+    @Autowired
+    private ProductRepository productRepo;
 
     public Page<Review> listByCustomerByPage(Customer customer, String keyword, int pageNum,
                                              String sortField, String sortDir) {
@@ -68,6 +73,16 @@ public class ReviewService {
     public boolean canCustomerReviewProduct(Customer customer, Integer productId) {
         Long count = orderDetailRepo.countByProductAndCustomerAndOrderStatus(productId, customer.getId(), OrderStatus.DELIVERED);
         return count > 0;
+    }
+
+    public Review save(Review review) {
+        review.setReviewTime(new Date());
+        Review savedReview = reviewRepo.save(review);
+
+        Integer productId = savedReview.getProduct().getId();
+        productRepo.updateReviewCountAndAverageRating(productId);
+
+        return savedReview;
     }
 
 }

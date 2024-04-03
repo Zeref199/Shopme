@@ -1,7 +1,10 @@
 com\shopme\product\ProductRepositoryTest.class
+com\shopme\review\vote\ReviewVoteRestControllerTests.class
 com\shopme\shoppingcart\CartItemRepositoryTests.class
 com\shopme\address\AddressRepositoryTests.class
 com\shopme\customer\CustomerRepositoryTests.class
+com\shopme\review\ReviewRepositoryTests.class
+com\shopme\review\vote\ReviewVoteRepositoryTests.class
 com\shopme\shipping\ShippingRateRepositoryTests.class
 com\shopme\category\CategoryRepositoryTest.class
 com\shopme\order\OrderRestControllerTests.class

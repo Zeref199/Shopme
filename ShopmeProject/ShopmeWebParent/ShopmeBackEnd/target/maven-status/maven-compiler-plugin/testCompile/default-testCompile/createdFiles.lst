@@ -5,13 +5,16 @@ com\shopme\admin\AmazonS3UtilTests.class
 com\shopme\admin\brand\BrandRepositoryTest.class
 com\shopme\admin\product\ProductRepositoryTest.class
 com\shopme\admin\setting\country\CountryRepositoryTests.class
+com\shopme\admin\report\ReportRestControllerTests.class
 com\shopme\admin\user\RoleRepositoryTest.class
 com\shopme\admin\brand\BrandServiceTest.class
 com\shopme\admin\setting\state\StateRepositoryTests.class
 com\shopme\admin\category\CategoryRepositoryTest.class
 com\shopme\admin\category\CategoryServiceTest.class
+com\shopme\admin\review\ReviewRepositoryTests.class
 com\shopme\admin\setting\country\CountryRestControllerTests.class
 com\shopme\admin\setting\SettingRepositoryTests.class
+com\shopme\admin\order\OrderDetailRepositoryTests.class
 com\shopme\admin\shippingrate\ShippingRateServiceTest.class
 com\shopme\admin\setting\state\StateRestControllerTests.class
 com\shopme\admin\user\PasswordEncoderTest.class

@@ -75,11 +75,11 @@ public class ReviewRepositoryTests {
         assertThat(review.getVotes()).isEqualTo(1);
     }
 
-//    @Test
-//    public void testGetVoteCount() {
-//        Integer reviewId = 5;
-//        Integer voteCount = repo.getVoteCount(reviewId);
-//
-//        assertThat(voteCount).isEqualTo(2);
-//    }
+    @Test
+    public void testGetVoteCount() {
+        Integer reviewId = 5;
+        Integer voteCount = repo.getVoteCount(reviewId);
+
+        assertThat(voteCount).isEqualTo(1);
+    }
 }

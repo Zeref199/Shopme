@@ -49,8 +49,9 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider())
                 .authorizeRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/account_details", "/update_account_details", "/orders/**",
-                                                 "/cart", "/address_book/**", "/checkout",
-                                                 "/place_order", "/process_paypal_order")
+                                                 "/cart", "/address_book/**", "/checkout", "/reviews/**",
+                                                 "/place_order", "/process_paypal_order", "/write_review/**",
+                                                    "/post_review")
                         .authenticated())
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login2")

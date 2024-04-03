@@ -7,6 +7,7 @@ import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.common.exception.ReviewNotFoundException;
 import com.shopme.product.service.ProductService;
+import com.shopme.review.vote.ReviewVoteService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,8 @@ public class ReviewController {
     private ControllerHelper controllerHelper;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ReviewVoteService voteService;
 
     @GetMapping("/reviews")
     public String listFirstPage(Model model) {
@@ -98,6 +101,11 @@ public class ReviewController {
 
         Page<Review> page = reviewService.listByProduct(product, pageNum, sortField, sortDir);
         List<Review> listReviews = page.getContent();
+
+        Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+        if (customer != null) {
+            voteService.markReviewsVotedForProductByCustomer(listReviews, product.getId(), customer.getId());
+        }
 
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());

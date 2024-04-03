@@ -65,4 +65,21 @@ public class ReviewRepositoryTests {
         List<Review> content = page.getContent();
         content.forEach(System.out::println);
     }
+
+    @Test
+    public void testUpdateVoteCount() {
+        Integer reviewId = 4;
+        repo.updateVoteCount(reviewId);
+        Review review = repo.findById(reviewId).get();
+
+        assertThat(review.getVotes()).isEqualTo(1);
+    }
+
+    @Test
+    public void testGetVoteCount() {
+        Integer reviewId = 5;
+        Integer voteCount = repo.getVoteCount(reviewId);
+
+        assertThat(voteCount).isEqualTo(1);
+    }
 }

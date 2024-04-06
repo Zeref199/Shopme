@@ -51,7 +51,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/account_details", "/update_account_details", "/orders/**",
                                                  "/cart", "/address_book/**", "/checkout", "/reviews/**",
                                                  "/place_order", "/process_paypal_order", "/write_review/**",
-                                                    "/post_review")
+                                                    "/post_review", "/ask_question/**", "/post_question/**", "/customer/questions/**")
                         .authenticated())
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login2")

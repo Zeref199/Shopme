@@ -4,6 +4,8 @@ import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Review;
 import com.shopme.common.entity.ReviewVote;
 import com.shopme.review.ReviewRepository;
+import com.shopme.vote.VoteResult;
+import com.shopme.vote.VoteType;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

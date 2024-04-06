@@ -4,13 +4,16 @@ import com.shopme.ControllerHelper;
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.Question;
 import com.shopme.common.entity.Review;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.CategoryNotFoundException;
 import com.shopme.common.exception.ProductNotFoundException;
 import com.shopme.product.service.ProductService;
+import com.shopme.question.QuestionService;
 import com.shopme.review.ReviewService;
 import com.shopme.review.vote.ReviewVoteService;
+import com.shopme.vote.QuestionVoteService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,9 +34,13 @@ public class ProductController {
     @Autowired
     private ReviewService reviewService;
     @Autowired
-    private ReviewVoteService voteService;
+    private ReviewVoteService reviewVoteService;
+    @Autowired
+    private QuestionVoteService questionVoteService;
     @Autowired
     private ControllerHelper controllerHelper;
+    @Autowired
+    private QuestionService questionService;
 
     @GetMapping("/c/{category_alias}")
     public String viewCategoryFirstPage(@PathVariable("category_alias") String alias, Model model){
@@ -77,13 +84,15 @@ public class ProductController {
         try {
             Product product = productService.getProduct(alias);
             List<Category> listCategoryParents = categoryService.getCategoryParents(product.getCategory());
+            List<Question> listQuestions = questionService.getTop3VotedQuestions(product.getId());
             Page<Review> listReviews = reviewService.list3MostVotedReviewsByProduct(product);
 
             Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 
             if (customer != null) {
                 boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
-                voteService.markReviewsVotedForProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
+                reviewVoteService.markReviewsVotedForProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
+                questionVoteService.markQuestionsVotedForProductByCustomer(listQuestions, product.getId(), customer.getId());
 
                 if (customerReviewed) {
                     model.addAttribute("customerReviewed", customerReviewed);
@@ -93,6 +102,12 @@ public class ProductController {
                 }
             }
 
+            int numberOfQuestions = questionService.getNumberOfQuestions(product.getId());
+            int numberOfAnsweredQuestions = questionService.getNumberOfAnsweredQuestions(product.getId());
+
+            model.addAttribute("listQuestions", listQuestions);
+            model.addAttribute("numberOfQuestions", numberOfQuestions);
+            model.addAttribute("numberOfAnsweredQuestions", numberOfAnsweredQuestions);
             model.addAttribute("listCategoryParents", listCategoryParents);
             model.addAttribute("product", product);
             model.addAttribute("listReviews", listReviews);

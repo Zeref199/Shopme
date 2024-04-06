@@ -1,4 +1,4 @@
-package com.shopme.review.vote;
+package com.shopme.vote;
 
 public class VoteResult {
     private boolean successful;

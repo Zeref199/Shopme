@@ -54,7 +54,7 @@
                 <td class="hideable-column">[[${order.status}]]</td>
 
                 <td><a
-                        class="fas fa-file-alt fa-2x icon-green linkOrderDetail"
+                        class="fas fa-file-alt fa-2x icon-green link-detail"
                         th:href="@{'/orders/detail/' + ${order.id}}"
                         title="View details of this order"></a> &nbsp;
                     <div th:replace="~{fragments :: edit('order', '/orders/edit/' + ${order.id})}"></div>
@@ -80,7 +80,7 @@
                         - [[${order.paymentMethod}]]
                     </div>
                     <div>
-                        <a class="fas fa-file-alt fa-2x icon-green linkOrderDetail"
+                        <a class="fas fa-file-alt fa-2x icon-green link-detail"
                            th:href="@{'/orders/detail/' + ${order.id}}"
                            title="View details of this order"></a> &nbsp;
                         <div th:replace="~{fragments :: edit('order', '/orders/edit/' + ${order.id})}"></div>
@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="orderDetailModal">
+    <div class="modal fade" id="detailModal">
         <div class="modal-dialog modal-xl">
             <div class="modal-content"></div>
         </div>
@@ -115,35 +115,12 @@
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
     moduleURL = "[[@{/orders}]]";
+    entityName = "order";
 
     $(document).ready(function () {
-        handleLinkViewCustomerDetails();
-        handleLinkViewOrderDetails();
-        handleLinkDeleteOrder();
+        handleDefaultDetailLinkClick();
+        handleDetailLinkClick(".linkCustomerDetail", "#customerDetailModal");
     });
-
-    function handleLinkDeleteOrder() {
-        $(".link-delete").on("click", function (e) {
-            e.preventDefault();
-            showDeleteConfirmModal($(this), 'order');
-        });
-    }
-
-    function handleLinkViewCustomerDetails() {
-        $(".linkCustomerDetail").on("click", function (e) {
-            e.preventDefault();
-            linkDetailURL = $(this).attr("href");
-            $("#customerDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
-        });
-    }
-
-    function handleLinkViewOrderDetails() {
-        $(".linkOrderDetail").on("click", function (e) {
-            e.preventDefault();
-            linkDetailURL = $(this).attr("href");
-            $("#orderDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
-        });
-    }
 </script>
 </body>
 

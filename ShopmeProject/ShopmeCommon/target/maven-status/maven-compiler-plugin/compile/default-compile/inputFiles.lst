@@ -5,6 +5,7 @@ C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\State.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\AbstractAddress.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\AuthenticationType.java
+C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\Review.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\Customer.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\exception\CustomerNotFoundException.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\exception\OrderNotFoundException.java
@@ -13,6 +14,7 @@ C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\order\PaymentMethod.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\order\OrderDetail.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\Currency.java
+C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\ReviewVote.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\CartItem.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\setting\SettingCategory.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\AbstractAddressWithCountry.java
@@ -21,6 +23,7 @@ C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\ShippingRate.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\Address.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\exception\ProductNotFoundException.java
+C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\exception\ReviewNotFoundException.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\exception\ShippingRateNotFoundException.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\exception\ShoppingCartException.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\Category.java

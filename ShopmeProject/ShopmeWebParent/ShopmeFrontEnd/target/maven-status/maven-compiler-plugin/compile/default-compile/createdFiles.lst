@@ -1,6 +1,9 @@
 com\shopme\setting\repo\CurrencyRepository.class
 com\shopme\shoppingcart\CartItemRepository.class
+com\shopme\review\ReviewService.class
 com\shopme\customer\service\CustomerService.class
+com\shopme\review\vote\ReviewVoteService.class
+com\shopme\review\ReviewController.class
 com\shopme\setting\repo\SettingRepository.class
 com\shopme\shipping\ShippingRateRepository.class
 com\shopme\ShopmeFrontEndApplication.class
@@ -10,6 +13,7 @@ com\shopme\setting\EmailSettingBag.class
 com\shopme\MainController.class
 com\shopme\product\service\ProductService.class
 com\shopme\Utility.class
+com\shopme\review\vote\VoteResult.class
 com\shopme\security\CustomerUserDetails.class
 com\shopme\security\WebSecurityConfig.class
 com\shopme\order\OrderService.class
@@ -18,6 +22,7 @@ com\shopme\security\oauth\CustomerOAuth2UserService.class
 com\shopme\shoppingcart\ShoppingCartController.class
 com\shopme\setting\CurrencySettingBag.class
 com\shopme\ControllerHelper.class
+com\shopme\review\ReviewRepository.class
 com\shopme\setting\SettingService.class
 com\shopme\order\OrderRepository.class
 com\shopme\shoppingcart\ShoppingCartService.class
@@ -32,12 +37,16 @@ com\shopme\security\oauth\OAuth2LoginSuccessHandler.class
 com\shopme\address\AddressService.class
 com\shopme\checkout\CheckoutController.class
 com\shopme\product\controller\ProductController.class
+com\shopme\order\OrderDetailRepository.class
 com\shopme\security\oauth\CustomerOAuth2User.class
 com\shopme\shipping\ShippingRateService.class
 com\shopme\security\CustomerUserDetailsService.class
+com\shopme\review\vote\VoteType.class
+com\shopme\review\vote\VoteType$1.class
 com\shopme\customer\controller\CustomerController.class
 com\shopme\order\OrderReturnResponse.class
 com\shopme\address\AddressController.class
+com\shopme\review\vote\ReviewVoteRepository.class
 com\shopme\checkout\CheckoutInfo.class
 com\shopme\order\OrderReturnRequest.class
 com\shopme\checkout\paypal\PayPalApiException.class
@@ -52,3 +61,5 @@ com\shopme\category\CategoryService.class
 com\shopme\checkout\paypal\PayPalService.class
 com\shopme\checkout\CheckoutService.class
 com\shopme\checkout\paypal\PayPalService$1.class
+com\shopme\review\vote\VoteType$2.class
+com\shopme\review\vote\ReviewVoteRestController.class

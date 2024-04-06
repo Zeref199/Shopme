@@ -144,18 +144,11 @@
 
 <script type="text/javascript">
     moduleURL = "[[@{/products}]]";
+    entityName = "products";
 
     $(document).ready(function(){
-        $(".link-delete").on("click", function (e){
-            e.preventDefault();
-            showDeleteConfirmModal($(this), 'brand');
-        });
+        handleDefaultDetailLinkClick();
 
-        $(".link-detail").on("click", function (e){
-            e.preventDefault();
-            let linkDetailURL = $(this).attr("href");
-            $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
-        });
         $("#dropdownCategory").on("change", function(){
             $("#searchForm").submit();
         });

@@ -111,6 +111,7 @@ public class CheckoutController {
 
     private void sendOrderConfirmationEmail(HttpServletRequest request, Order order)
             throws UnsupportedEncodingException, MessagingException {
+        String here = "https://shopoumi-frontend-e79109250729.herokuapp.com/orders";
         EmailSettingBag emailSettings = settingService.getEmailSettings();
         JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
         mailSender.setDefaultEncoding("utf-8");
@@ -140,6 +141,7 @@ public class CheckoutController {
         content = content.replace("[[shippingAddress]]", order.getShippingAddress());
         content = content.replace("[[total]]", totalAmount);
         content = content.replace("[[paymentMethod]]", order.getPaymentMethod().toString());
+        content = content.replace("[[orderLink]]", here);
 
         helper.setText(content, true);
         mailSender.send(message);

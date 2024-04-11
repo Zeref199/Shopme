@@ -2,19 +2,16 @@ package com.shopme.question;
 
 import com.shopme.ControllerHelper;
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.Question;
 import com.shopme.common.exception.ProductNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.shopme.common.entity.Question;
 
 import java.io.IOException;
 
@@ -38,15 +35,5 @@ public class QuestionRestController {
         questionService.saveNewQuestion(question, customerUser, productId);
 
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PostMapping("/getquestionvote/{questionId}")
-    public ResponseEntity<?> getVotesForQuestion(@PathVariable(name = "questionId") Integer questionId,
-                                                 @AuthenticationPrincipal Authentication auth) {
-        if (auth == null || auth instanceof AnonymousAuthenticationToken) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-        int votes = questionService.getVotesForQuestion(questionId);
-        return new ResponseEntity<String>(String.valueOf(votes), HttpStatus.OK);
     }
 }

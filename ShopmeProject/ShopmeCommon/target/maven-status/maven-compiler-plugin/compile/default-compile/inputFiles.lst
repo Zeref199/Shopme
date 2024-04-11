@@ -16,6 +16,8 @@ C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\Currency.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\ReviewVote.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\CartItem.java
+C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\Question.java
+C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\QuestionVote.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\setting\SettingCategory.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\AbstractAddressWithCountry.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\order\OrderTrack.java
@@ -31,6 +33,7 @@ C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\order\OrderStatus.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\setting\Setting.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\IdBasedEntity.java
+C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\exception\QuestionNotFoundException.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\User.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\entity\product\ProductDetail.java
 C:\Users\Othmanox\IdeaProjects\TestProject\Shopme\ShopmeProject\ShopmeCommon\src\main\java\com\shopme\common\exception\CategoryNotFoundException.java

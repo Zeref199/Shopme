@@ -21,7 +21,7 @@ public class Product extends IdBasedEntity {
     private String fullDescription;
     @Column(name= "created_time")
     private Date createdTime;
-    @Column(name= "updated_time")
+    @Column(name= "updated_time", nullable = false, updatable = false)
     private Date updatedTime;
 
     private boolean enabled;

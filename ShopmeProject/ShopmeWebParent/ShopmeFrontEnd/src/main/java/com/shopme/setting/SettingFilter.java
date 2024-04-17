@@ -1,7 +1,9 @@
 package com.shopme.setting;
 
 import com.shopme.common.Constants;
+import com.shopme.common.entity.Menu;
 import com.shopme.common.entity.setting.Setting;
+import com.shopme.menu.MenuService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import java.util.List;
 @Order(-123)
 public class SettingFilter implements Filter {
     @Autowired
-    private SettingService service;
+    private SettingService articleService;
+    @Autowired
+    private MenuService menuService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -27,14 +31,28 @@ public class SettingFilter implements Filter {
             return;
         }
 
-        List<Setting> generalSettings = service.getGeneralSettings();
+        loadGeneralSettings(request);
+        loadMenuSettings(request);
+
+        chain.doFilter(request, response);
+    }
+
+    private void loadMenuSettings(ServletRequest request) {
+        List<Menu> headerMenuItems = menuService.getHeaderMenuItems();
+        request.setAttribute("headerMenuItems", headerMenuItems);
+
+        List<Menu> footerMenuItems = menuService.getFooterMenuItems();
+        request.setAttribute("footerMenuItems", footerMenuItems);
+    }
+
+    private void loadGeneralSettings(ServletRequest request) {
+        List<Setting> generalSettings = articleService.getGeneralSettings();
 
         generalSettings.forEach(setting -> {
             request.setAttribute(setting.getKey(), setting.getValue());
+            System.out.println(setting.getKey() + " == > " + setting.getValue());
         });
 
         request.setAttribute("S3_BASE_URI", Constants.S3_BASE_URI);
-
-        chain.doFilter(request, response);
     }
 }

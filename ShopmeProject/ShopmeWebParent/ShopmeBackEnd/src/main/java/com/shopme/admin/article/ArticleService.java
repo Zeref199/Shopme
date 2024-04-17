@@ -2,13 +2,15 @@ package com.shopme.admin.article;
 
 import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.common.entity.Article;
+import com.shopme.common.entity.ArticleType;
+import com.shopme.common.entity.User;
 import com.shopme.common.exception.ArticleNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.shopme.common.entity.User;
 
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -21,6 +23,10 @@ public class ArticleService {
 
     public void listByPage(int pageNum, PagingAndSortingHelper helper) {
         helper.listEntities(pageNum, ARTICLES_PER_PAGE, repo);
+    }
+
+    public List<Article> listArticlesForMenu() {
+        return repo.findByTypeOrderByTitle(ArticleType.MENU_BOUND);
     }
 
     public void save(Article article, User user) {

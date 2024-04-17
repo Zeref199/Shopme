@@ -51,7 +51,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/products", "/products/", "/products/detail/**", "/products/page/**")
                         .hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
 
-                        .requestMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
+                        .requestMatchers("/products/**", "/menus/**", "/articles/**").hasAnyAuthority("Admin", "Editor")
 
                         .requestMatchers("/orders", "/orders/", "/orders/page/**", "/orders/detail/**").hasAnyAuthority("Admin", "Salesperson", "Shipper")
 
@@ -61,7 +61,7 @@ public class WebSecurityConfig {
 
                         .requestMatchers("/orders_shipper/update/**").hasAuthority("Shipper")
 
-                        .requestMatchers("/reviews/**").hasAnyAuthority("Admin", "Assistant")
+                        .requestMatchers("/reviews/**", "/questions/**").hasAnyAuthority("Admin", "Assistant")
                         .anyRequest()
                         .authenticated())
                 .formLogin((formLogin) -> formLogin

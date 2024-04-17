@@ -101,4 +101,9 @@ public class Article extends IdBasedEntity {
         this.user = user;
     }
 
+    @Override
+    public String toString() {
+        return "Article [title=" + title + ", type=" + type + "]";
+    }
+
 }

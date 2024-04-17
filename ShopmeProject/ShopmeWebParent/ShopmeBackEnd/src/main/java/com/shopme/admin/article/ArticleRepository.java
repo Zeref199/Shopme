@@ -2,10 +2,13 @@ package com.shopme.admin.article;
 
 import com.shopme.admin.paging.SearchRepository;
 import com.shopme.common.entity.Article;
+import com.shopme.common.entity.ArticleType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface ArticleRepository extends SearchRepository<Article, Integer> {
     @Query("SELECT NEW Article(a.id, a.title, a.type, a.updatedTime, a.published, a.user) "
@@ -19,4 +22,6 @@ public interface ArticleRepository extends SearchRepository<Article, Integer> {
     @Query("UPDATE Article a SET a.published = ?2 WHERE a.id = ?1")
     @Modifying
     public void updatePublishStatus(Integer id, boolean published);
+
+    public List<Article> findByTypeOrderByTitle(ArticleType type);
 }

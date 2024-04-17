@@ -15,15 +15,13 @@
         </button>
         <div class="collapse navbar-collapse w-100" id="topNavbar">
             <ul class="navbar-nav d-flex w-100 ">
+                <!-- Start of Dynamic Header Menu Items -->
+                <th:block th:each="headerMenu : ${headerMenuItems}">
                 <li class="nav-item" >
-                    <a class="nav-link" href="" >Careers</a>
+                    <a class="nav-link" th:href="@{'/m/' + ${headerMenu.alias}}">[[${headerMenu.title}]]</a>
                 </li>
-                <li class="nav-item" >
-                    <a class="nav-link" href="" >Payments</a>
-                </li>
-                <li class="nav-item" >
-                    <a class="nav-link" href="" >Shipping &amp; Delivery</a>
-                </li>
+                </th:block>
+                <!-- End of Dynamic Header Menu Items -->
                 <th:block sec:authorize="!isAuthenticated()">
                     <li class="nav-item" >
                         <a class="nav-link" th:href="@{/login2}" >Login</a>
@@ -103,15 +101,11 @@
                 </button>
                 <div class="collapse navbar-collapse w-100" id="bottomNavbar">
                     <ul class="navbar-nav d-flex w-100 ">
+                        <th:block th:each="footerMenu : ${footerMenuItems}">
                         <li class="nav-item" >
-                            <a class="nav-link" href="" >About Us</a>
+                            <a class="nav-link" th:href="@{'/m/' + ${footerMenu.alias}}">[[${footerMenu.title}]]</a>
                         </li>
-                        <li class="nav-item" >
-                            <a class="nav-link" href="" >Privacy Notice</a>
-                        </li>
-                        <li class="nav-item" >
-                            <a class="nav-link" href="" >Returns &amp; Refunds</a>
-                        </li>
+                        </th:block>
                     </ul>
                 </div>
             </nav>

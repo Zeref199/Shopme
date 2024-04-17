@@ -29,11 +29,13 @@ com\shopme\common\entity\product\ProductDetail.class
 com\shopme\common\entity\setting\SettingCategory.class
 com\shopme\common\exception\ShippingRateAlreadyExistsException.class
 com\shopme\common\entity\Currency.class
+com\shopme\common\entity\QuestionVote.class
 com\shopme\common\entity\Customer.class
 com\shopme\common\entity\order\OrderStatus$9.class
 com\shopme\common\entity\setting\SettingBag.class
 com\shopme\common\entity\StateDTO.class
 com\shopme\common\exception\CategoryNotFoundException.class
+com\shopme\common\entity\Question.class
 com\shopme\common\entity\order\OrderStatus.class
 com\shopme\common\entity\order\OrderStatus$5.class
 com\shopme\common\exception\OrderNotFoundException.class
@@ -44,6 +46,7 @@ com\shopme\common\entity\State.class
 com\shopme\common\exception\ProductNotFoundException.class
 com\shopme\common\exception\ShippingRateNotFoundException.class
 com\shopme\common\exception\CustomerNotFoundException.class
+com\shopme\common\exception\QuestionNotFoundException.class
 com\shopme\common\entity\order\OrderStatus$11.class
 com\shopme\common\entity\order\OrderStatus$6.class
 com\shopme\common\entity\product\Product.class

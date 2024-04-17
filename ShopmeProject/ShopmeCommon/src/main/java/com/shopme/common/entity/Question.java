@@ -7,10 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "questions")
-public class Question {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Question extends IdBasedEntity {
 
     @Column(name = "question")
     private String questionContent;
@@ -36,14 +33,6 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "asker_id")
     private Customer asker;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getQuestionContent() {
         return questionContent;

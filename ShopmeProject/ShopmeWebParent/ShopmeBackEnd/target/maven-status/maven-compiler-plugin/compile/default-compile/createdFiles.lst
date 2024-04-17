@@ -11,6 +11,7 @@ com\shopme\admin\order\repo\OrderRepository.class
 com\shopme\admin\brand\CategoryDTO.class
 com\shopme\admin\category\repo\CategoryRepository.class
 com\shopme\admin\order\controller\ProductSearchController.class
+com\shopme\admin\question\QuestionService.class
 com\shopme\admin\user\controller\AccountController.class
 com\shopme\admin\user\repo\RoleRepository.class
 com\shopme\admin\setting\state\StateRepository.class
@@ -35,6 +36,7 @@ com\shopme\admin\category\service\CategoryService$1.class
 com\shopme\admin\setting\country\CountryRestController.class
 com\shopme\admin\user\export\UserPdfExporter.class
 com\shopme\admin\paging\SearchRepository.class
+com\shopme\admin\question\QuestionRepository.class
 com\shopme\admin\user\controller\UserRestController.class
 com\shopme\admin\setting\CurrencyRepository.class
 com\shopme\admin\product\repo\ProductRepository.class
@@ -60,6 +62,7 @@ com\shopme\admin\user\controller\UserController.class
 com\shopme\admin\customer\repo\CustomerRepository.class
 com\shopme\admin\brand\service\BrandService.class
 com\shopme\admin\product\controller\ProductSaveHelper.class
+com\shopme\admin\question\QuestionController.class
 com\shopme\admin\setting\country\CountryRepository.class
 com\shopme\admin\review\ReviewService.class
 com\shopme\admin\order\controller\Response.class

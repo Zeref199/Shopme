@@ -25,6 +25,10 @@ public class ArticleService {
         helper.listEntities(pageNum, ARTICLES_PER_PAGE, repo);
     }
 
+    public List<Article> listAll() {
+        return repo.findPublishedArticlesWithIDAndTitleOnly();
+    }
+
     public List<Article> listArticlesForMenu() {
         return repo.findByTypeOrderByTitle(ArticleType.MENU_BOUND);
     }

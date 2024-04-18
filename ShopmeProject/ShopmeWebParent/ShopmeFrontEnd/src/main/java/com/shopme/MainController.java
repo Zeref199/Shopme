@@ -2,6 +2,9 @@ package com.shopme;
 
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
+import com.shopme.common.entity.section.Section;
+import com.shopme.common.entity.section.SectionType;
+import com.shopme.section.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,13 +19,28 @@ import java.util.List;
 public class MainController {
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private SectionService sectionService;
 
     @GetMapping("")
     public String ViewHomePage(Model model){
-        List<Category> listCategories = categoryService.listNoChildrenCategories();
-        model.addAttribute("listCategories", listCategories);
+        List<Section> listSections = sectionService.listEnabledSections();
+        model.addAttribute("listSections", listSections);
 
+        if (hasAllCategoriesSection(listSections)) {
+            List<Category> listCategories = categoryService.listNoChildrenCategories();
+            model.addAttribute("listCategories", listCategories);
+        }
         return "index";
+    }
+
+    private boolean hasAllCategoriesSection(List<Section> listSections) {
+        for (Section section : listSections) {
+            if (section.getType().equals(SectionType.ALL_CATEGORIES)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @GetMapping("/login2")

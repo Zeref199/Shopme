@@ -23,6 +23,10 @@ public class CategoryService {
 
     public static final int ROOT_CATEGORIES_PER_PAGE = 4;
 
+    public List<Category> listAll() {
+        return listByPage(new CategoryPageInfo(), 1, "asc", null);
+    }
+
     public List<Category> listByPage(CategoryPageInfo pageInfo, int pageNum, String sortDir, String keyword){
         Sort sort = Sort.by("name");
 

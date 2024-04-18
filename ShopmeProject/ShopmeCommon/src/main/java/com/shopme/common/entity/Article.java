@@ -41,6 +41,11 @@ public class Article extends IdBasedEntity {
         this.user = user;
     }
 
+    public Article(Integer id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
     public Article(Integer id) {
         this.id = id;
     }

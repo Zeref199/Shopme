@@ -26,6 +26,12 @@ public class ProductService {
         return repo.listByCategory(categoryId, categoryIdMatch, pageable);
     }
 
+    public Page<Product> listByBrand(int pageNum, Integer brandId) {
+        Pageable pageable = PageRequest.of(pageNum - 1, PRODUCTS_PER_PAGE);
+
+        return repo.listByBrand(brandId, pageable);
+    }
+
     public Product getProduct(String alias) throws ProductNotFoundException{
         Product product = repo.findByAlias(alias);
         if(product == null){
